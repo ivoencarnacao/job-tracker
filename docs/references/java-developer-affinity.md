@@ -2,7 +2,6 @@
 job_id: "java-developer-affinity"
 captured_at: "2026-02-19T21:53:00"
 status: "not applied"
-applied_at: ""
 
 company:
   name: "Affinity"

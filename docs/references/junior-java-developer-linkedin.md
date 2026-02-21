@@ -2,7 +2,6 @@
 job_id: "junior-java-developer-linkedin"
 captured_at: "2026-02-20T21:28:00"
 status: "not applied"
-applied_at: ""
 
 company:
   name: "Randstad"
@@ -44,8 +43,6 @@ A Randstad é a líder mundial em soluções de recursos humanos e serviços de 
 
 Pretendemos admitir um(a) Junior Java Developer para um cliente de referência.
 
-
-
 **Responsabilidades**
 
 - Atuar no desenvolvimento e manutenção de aplicações utilizando a linguagem Java;
@@ -55,7 +52,6 @@ Pretendemos admitir um(a) Junior Java Developer para um cliente de referência.
 - Colaborar com a equipe técnica no levantamento de requisitos e definição de soluções;
 - Participar em rituais de metodologias ágeis (Scrum/Kanban);
 - Auxiliar na escrita de testes unitários para garantir a qualidade das entregas.
-
 
 **Competências:**
 
@@ -67,7 +63,6 @@ Pretendemos admitir um(a) Junior Java Developer para um cliente de referência.
 - Conhecimento básico em ferramentas de versionamento de código (Git);
 - Familiaridade com arquitetura de microserviços e containers (Docker) será considerada um diferencial;
 - Proatividade, vontade de aprender e capacidade de trabalhar em equipe.
-
 
 **Principais benefícios:**
 

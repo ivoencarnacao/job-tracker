@@ -1,4 +1,4 @@
-# Job Tracking App para Procura de Emprego (MVP)
+# Job Tracking App (MVP)
 
 ## 1) Resumo do Produto
 

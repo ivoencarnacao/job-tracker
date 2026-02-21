@@ -1,107 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.10</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>dev.ivoencarnacao</groupId>
-	<artifactId>jobtracker</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>jobtracker</name>
-	<description>Demo project for Spring Boot</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
-	<properties>
-		<java.version>21</java.version>
-	</properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.11</version>
+        <relativePath/>
+        <!-- lookup parent from repository -->
+    </parent>
+    <groupId>dev.ivoencarnacao</groupId>
+    <artifactId>jobtracker</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>jobtracker</name>
+    <description>Demo project for Spring Boot</description>
+    <url/>
 
-	<dependencies>
+    <licenses>
+        <license/>
+    </licenses>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+    <developers>
+        <developer/>
+    </developers>
 
-		<dependency>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+
+    <properties>
+        <java.version>21</java.version>
+        <!-- Maven plugins -->
+        <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
+        <frontend-maven-plugin.nodeVersion>v24.13.1</frontend-maven-plugin.nodeVersion>
+        <frontend-maven-plugin.npmVersion>11.8.0</frontend-maven-plugin.npmVersion>
+    </properties>
+
+    <dependencies>
+
+        <!-- Spring Web (Web) (SQL) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Data JPA (SQL) -->
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+        <!-- PostgreSQL Driver (SQL) -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
+        <!-- Validation (I/O) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
+        <!-- Flyway Migration (SQL) -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
 
-		<dependency>
+        <!-- Flyway Migration / PostgreSQL (SQL) -->
+        <dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-database-postgresql</artifactId>
 		</dependency>
 
-		<dependency>
+        <!-- Thymeleaf (Template Engines) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+		<!-- Spring Security (Security) -->
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-		<dependency>
+        <!-- Spring Security / Thymeleaf -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
+
+		<!-- Docker Compose Support (Developer Tools) -->
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-docker-compose</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
+		<!-- Spring Boot DevTools (Developer Tools) -->
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
-		</dependency>
-		
-		<!-- Testing -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+		</dependency>   
 
-		<dependency>
+        <dependency>
+            <groupId>io.github.wimdeblauwe</groupId>
+            <artifactId>vite-spring-boot-thymeleaf</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+        </dependency>
+    
+        <!-- Web dependencies -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-lite</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Testcontainers (Testing) -->
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-testcontainers</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
+		<!-- Spring Security (Testing) -->
+        <dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
+		
+        <dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
@@ -112,15 +161,66 @@
 			<artifactId>postgresql</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
+    
+    </dependencies>
+    
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*.html</exclude>
+                    <exclude>**/*.css</exclude>
+                    <exclude>**/*.js</exclude>
+                    <exclude>**/*.svg</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>${frontend-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>install-frontend-tooling</id>
+                            <goals>
+                                <goal>install-node-and-npm</goal>
+                            </goals>
+                            <configuration>
+                                <nodeVersion>${frontend-maven-plugin.nodeVersion}</nodeVersion>
+                                <npmVersion>${frontend-maven-plugin.npmVersion}</npmVersion>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>run-npm-install</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>run-npm-build</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <configuration>
+                                <arguments>run build</arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

@@ -117,6 +117,7 @@
             <version>1.0.0</version>
         </dependency>
     
+        <!-- Thymeleaf Layout Dialect -->
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>

@@ -1,3 +1,62 @@
 {
-  "java.configuration.updateBuildConfiguration": "interactive"
+  // --- Visual & Editor ---
+  "editor.fontFamily": "Geist Mono, Consolas, 'Courier New', monospace",
+  "editor.fontSize": 30,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.wordWrap": "off",
+  "editor.rulers": [
+    120
+  ],
+  "editor.guides.bracketPairs": true,
+  // --- Automation & Clean Code ---
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  // --- Java & Spring Boot Configuration ---
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-25",
+      "path": "C:\\Program Files\\Java\\jdk-25",
+      "default": true
+    }
+  ],
+  "editor.defaultFormatter": "redhat.java",
+  // --- Testing ---
+  "java.test.config": {
+    "testKind": "junit"
+  },
+  "java.completion.favoriteStaticMembers": [
+    // JUnit 5
+    "org.junit.jupiter.api.Assertions.*",
+    "org.junit.jupiter.api.Assumptions.*",
+    "org.junit.jupiter.api.DynamicContainer.*",
+    "org.junit.jupiter.api.DynamicTest.*",
+    // Mockito
+    "org.mockito.Mockito.*",
+    "org.mockito.ArgumentMatchers.*",
+    "org.mockito.Answers.*",
+    // AssertJ (Clean Testing)
+    "org.assertj.core.api.Assertions.*",
+    "org.assertj.core.api.InstanceOfAssertFactories.*"
+  ],
+  // --- Readability ---
+  "java.inlayHints.parameterNames.enabled": "all",
+  "java.inlayHints.variableTypes.enabled": true,
+  // --- Spell Checker ---
+  "cSpell.language": "en-US,pt-PT",
+  "cSpell.words": [],
+  // --- JSON & JSONC ---
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  // --- Explorer ---
+  "explorer.compactFolders": false,
 }

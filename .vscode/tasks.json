@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Spring Boot",
+            "type": "shell",
+            "command": ".\\mvnw --% spring-boot:run -Dspring-boot.run.profiles=local",
+            "isBackground": true,
+            "presentation": {
+                "panel": "dedicated",
+                "group": "dev-environment",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Start Vite",
+            "type": "shell",
+            "command": "npm run dev",
+            "isBackground": true,
+            "presentation": {
+                "panel": "dedicated",
+                "group": "dev-environment",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🚀 Run Job Tracker",
+            "dependsOn": [
+                "Start Spring Boot",
+                "Start Vite"
+            ],
+            "dependsOrder": "parallel",
+            "problemMatcher": []
+        }
+    ]
+}

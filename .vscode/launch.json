@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug Job Tracker (Spring Boot)",
+            "request": "launch",
+            "mainClass": "dev.ivoencarnacao.jobtracker.Application",
+            "projectName": "jobtracker",
+            "vmArgs": "-Dspring.profiles.active=local"
+        }
+    ]
+}

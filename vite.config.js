@@ -1,9 +1,11 @@
 import {defineConfig} from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import springBoot from '@wim.deblauwe/vite-plugin-spring-boot';
 
 export default defineConfig({
     plugins: [
+        tailwindcss(),
         springBoot()
     ],
     root: path.join(__dirname, './src/main/resources'),
@@ -16,7 +18,7 @@ export default defineConfig({
         },
         outDir: path.join(__dirname, `./target/classes/static`),
         copyPublicDir: false,
-        emptyOutDir: true
+        emptyOutDir: false
     },
     server: {
         proxy: {

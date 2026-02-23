@@ -1,0 +1,31 @@
+{
+  "version": "0.2",
+  "language": "en-US,pt-PT",
+  "ignorePaths": [
+    // Version Control
+    ".git/**",
+    ".vscode/**",
+    // Java & Spring Boot
+    "target/**",
+    "build/**",
+    // Frontend & Node
+    "node_modules/**",
+    "dist/**",
+    // Logs and others
+    "*.log"
+  ],
+  "words": [
+    "eirslett",
+    "flywaydb",
+    "ivoencarnacao",
+    "jobtracker",
+    "mapstruct",
+    "springframework",
+    "springsecurity",
+    "Thymeleaf",
+    "ultraq",
+    "vite",
+    "webjars",
+    "wimdeblauwe"
+  ]
+}

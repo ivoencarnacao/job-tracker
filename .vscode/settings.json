@@ -47,9 +47,6 @@
   // --- Readability ---
   "java.inlayHints.parameterNames.enabled": "all",
   "java.inlayHints.variableTypes.enabled": true,
-  // --- Spell Checker ---
-  "cSpell.language": "en-US,pt-PT",
-  "cSpell.words": [],
   // --- JSON & JSONC ---
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"

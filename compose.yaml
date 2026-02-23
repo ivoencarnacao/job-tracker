@@ -1,9 +1,78 @@
 services:
-  postgres:
-    image: 'postgres:latest'
-    environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jobtracker-app
+    restart: unless-stopped
     ports:
-      - '5432'
+      - "8081:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://${POSTGRES_HOST:-db}:${POSTGRES_PORT:-5432}/${POSTGRES_DB:-jobtracker_db}?currentSchema=core
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER:-postgres}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD:-postgres}    
+      - SPRING_FLYWAY_ENABLED=true
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - jobtracker-network
+    mem_limit: 1g
+    mem_reservation: 512m
+
+  db:
+    image: "postgres:17"
+    container_name: jobtracker-db
+    restart: unless-stopped
+    environment:
+      - "POSTGRES_DB=${POSTGRES_DB:-jobtracker_db}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}"
+      - "POSTGRES_USER=${POSTGRES_USER:-postgres}"
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-schemas.sql:/docker-entrypoint-initdb.d/init-schemas.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-jobtracker_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jobtracker-network
+    mem_limit: 1g
+    mem_reservation: 512m
+
+  pgadmin:
+    image: "dpage/pgadmin4:8"
+    container_name: jobtracker-pgadmin
+    restart: unless-stopped
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-admin@admin.com}"
+      - "PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD:-admin}"
+      - "PGADMIN_CONFIG_SERVER_MODE=False"
+      - "PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False"
+      - "PGADMIN_SERVER_JSON_FILE=/pgadmin4/servers.json"
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./servers.json:/pgadmin4/servers.json:ro
+    networks:
+      - jobtracker-network
+    depends_on:
+      db:
+        condition: service_healthy
+    mem_limit: 1g
+    mem_reservation: 512m
+
+networks:
+  jobtracker-network:
+    driver: bridge
+    name: jobtracker-network
+
+volumes:
+  postgres_data:
+    name: jobtracker_postgres_data
+  pgadmin_data:
+    name: jobtracker_pgadmin_data

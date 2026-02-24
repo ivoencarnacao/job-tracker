@@ -1,0 +1,5 @@
+{
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./src/main/resources/static/css/application.css",
+  "tailwindAttributes": ["th:class", "th:classappend"]
+}

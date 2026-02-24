@@ -12,20 +12,16 @@
     "node_modules/**",
     "dist/**",
     // Logs and others
-    "*.log"
+    "*.log",
+    ".dockerignore",
+    ".gitattributes",
+    ".gitignore",
+    ".prettierrc",
+    "Dockerfile",
+    "compose.yaml",
+    "package.json",
+    "package-lock.json",
+    "vite.config.js"
   ],
-  "words": [
-    "eirslett",
-    "flywaydb",
-    "ivoencarnacao",
-    "jobtracker",
-    "mapstruct",
-    "springframework",
-    "springsecurity",
-    "Thymeleaf",
-    "ultraq",
-    "vite",
-    "webjars",
-    "wimdeblauwe"
-  ]
+  "words": []
 }

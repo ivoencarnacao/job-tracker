@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/main}">
-<head>
-    <title></title>
-</head>
-<body>
-<div layout:fragment="content">
-    <!-- Add content here -->
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/main}"
+>
+  <head>
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <!-- Add content here -->
+    </div>
 
-</div>
-
-<th:block layout:fragment="script-content">
-    <!-- Add additional scripts that there are only needed for this page (Application wide scripts should be added in layout/main.html) -->
-</th:block>
-</body>
+    <th:block layout:fragment="script-content">
+      <!-- Add additional scripts that there are only needed for this page (Application wide scripts should be added in layout/main.html) -->
+    </th:block>
+  </body>
 </html>

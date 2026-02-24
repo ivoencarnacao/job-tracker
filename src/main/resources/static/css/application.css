@@ -3,3 +3,7 @@
 @plugin "@tailwindcss/container-queries";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
+
+@theme {
+  --font-geist: "Geist", "Geist Fallback", sans-serif;
+}

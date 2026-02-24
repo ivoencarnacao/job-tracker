@@ -1,9 +1,13 @@
 ---
 job_id: "java-developer-kcs"
 captured_at: "2026-02-19T19:44:00"
-status: "rejected"
-applied_at: "2026-02-19T20:25:00"
-updated_at: "2026-02-20T21:22:00"
+status:
+  - type: "action"
+    value: "applied"
+    applied_at: "2026-02-19T20:25:00"
+  - type: "action"
+    value: "rejected"
+    updated_at: "2026-02-20T21:22:00"
 
 company:
   name: "KCS IT"
@@ -18,24 +22,30 @@ job:
     city: "Lisboa"
     country: "Portugal"
   posted_at: "2026-02-12"
-  min_experience_years: "3 years"
-  technologies:
-    [
-      "Java 8+",
-      "Spring Boot",
-      "Spring Data",
-      "Spring Security",
-      "Oracle",
-      "MySQL",
-      "PostgreSQL",
-      "MongoDB",
-      "Redis",
-      "GitFlow",
-      "Jenkins",
-      "GitLab CI",
-      "Azure DevOps",
-      "Scrum/Kanban",
-    ]
+  min_experience_years: 3
+  requirements:
+    languages:
+      - "Java 8+"
+    frameworks:
+      - "Spring Boot"
+      - "Spring Data"
+      - "Spring Security"
+    databases:
+      relational:
+        - "Oracle"
+        - "MySQL"
+        - "PostgreSQL"
+      nosql:
+        - "MongoDB"
+        - "Redis"
+    devops_and_tools:
+      - "GitFlow"
+      - "Jenkins"
+      - "GitLab CI"
+      - "Azure DevOps"
+    methodologies:
+      - "Scrum"
+      - "Kanban"
 
 contacts:
   - type: "phone_number"

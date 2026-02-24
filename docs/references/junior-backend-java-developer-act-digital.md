@@ -19,7 +19,7 @@ job:
       value: "Porto"
     country: "Portugal"
   availability: "Immediate or within 10 days"
-  min_experience_years: "3 years"
+  min_experience_years: 3
   posted_at: "2025-10-20T22:59"
   job_poster:
     name: "Beatriz Silva"

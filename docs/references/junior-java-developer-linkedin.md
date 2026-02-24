@@ -1,7 +1,6 @@
 ---
 job_id: "junior-java-developer-linkedin"
 captured_at: "2026-02-20T21:28:00"
-status: "not applied"
 
 company:
   name: "Randstad"
@@ -16,16 +15,23 @@ job:
     city: "Lisboa"
     country: "Portugal"
   posted_at: "2026-02-20T10:32"
-  min_experience_years: "3 years"
-  technologies:
-    [
-      "Java 8+",
-      "Hibernate ou Spring Data",
-      "SQL Server, MySQL, ou PostgreSQL",
-      "Git",
-      "Docker",
-      "Microservices",
-    ]
+  min_experience_years: 3
+  requirements:
+    languages:
+      - "Java 8+"
+    frameworks:
+      - "Hibernate"
+      - "Spring Data"
+    databases:
+      relational:
+        - "SQL Server"
+        - "MySQL"
+        - "PostgreSQL"
+    devops_and_tools:
+      - "Git"
+      - "Docker"
+    architectures:
+      - "Microservices"
 
 sources:
   - site: "Linkedin"

@@ -1,7 +1,6 @@
 ---
 job_id: "java-developer-affinity"
 captured_at: "2026-02-19T21:53:00"
-status: "not applied"
 
 company:
   name: "Affinity"
@@ -16,8 +15,13 @@ job:
     city: "Lisboa"
     country: "Portugal"
   posted_at: "2026-02-18"
-  min_experience_years: "3 years"
-  technologies: ["Spring Boot", "SQL Server"]
+  min_experience_years: 3
+  requirements:
+    frameworks:
+      - "Spring Boot"
+    databases:
+      relational:
+        - "SQL Server"
   job_poster:
     name: "Catarina Ávila"
     title: "Talent Manager"

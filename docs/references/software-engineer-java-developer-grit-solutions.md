@@ -1,7 +1,6 @@
 ---
 job_id: "software-engineer-java-developer-grit-solutions"
 captured_at: "2026-02-17T20:39:00"
-status: "not applied"
 
 company:
   name: "GRIT Solutions"
@@ -24,8 +23,17 @@ job:
       postal_code: "4100-359 Porto"
       country: "Portugal"
   posted_at: "2026-02-10"
-  min_experience_years: "3 years"
-  technologies: ["Java", "Spring", "Jenkins", "JUnit", "GitLab"]
+  min_experience_years: 3
+  requirements:
+    languages:
+      - "Java"
+    frameworks:
+      - "Spring"
+    devops_and_tools:
+      - "Jenkins"
+      - "GitLab"
+    testing:
+      - "JUnit"
 
 contacts:
   - type: "mobile_phone"

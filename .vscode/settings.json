@@ -7,15 +7,28 @@
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
   "editor.wordWrap": "off",
-  "editor.rulers": [
-    120
-  ],
+  "editor.rulers": [120],
   "editor.guides.bracketPairs": true,
+
   // --- Automation & Clean Code ---
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
+
+  // Formatter (Global)
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Formatter (Java, XML)
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java",
+    "editor.tabSize": 4
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml",
+    "editor.tabSize": 4
+  },
+
   // --- Java & Spring Boot Configuration ---
   "java.configuration.updateBuildConfiguration": "interactive",
   "java.configuration.runtimes": [
@@ -25,7 +38,11 @@
       "default": true
     }
   ],
-  "editor.defaultFormatter": "redhat.java",
+
+  // --- Readability ---
+  "java.inlayHints.parameterNames.enabled": "all",
+  "java.inlayHints.variableTypes.enabled": true,
+
   // --- Testing ---
   "java.test.config": {
     "testKind": "junit"
@@ -44,16 +61,46 @@
     "org.assertj.core.api.Assertions.*",
     "org.assertj.core.api.InstanceOfAssertFactories.*"
   ],
-  // --- Readability ---
-  "java.inlayHints.parameterNames.enabled": "all",
-  "java.inlayHints.variableTypes.enabled": true,
+
+  // --- Thymeleaf & HTML Configuration ---
+  "files.associations": {
+    "*.html": "html"
+  },
+  "html.format.templating": true,
+  "html.format.wrapAttributes": "preserve-aligned",
+  "html.format.unformatted": "b, em, i, span, strong, th:block",
+  "html.suggest.html5": true,
+
+  // --- SQL & Database Configuration ---
+  "[sql]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.wordWrap": "off",
+    "editor.formatOnSave": true
+  },
+
+  // --- Tailwind CSS v4 Configuration ---
+  "css.lint.unknownAtRules": "ignore",
+  "tailwindCSS.experimental.classRegex": [
+    "th:class=\"([^\"]*)\"",
+    "th:classappend=\"([^\"]*)\"",
+    "th:classappend=\"\\s*\\+?\\s*'([^']*)'",
+    "class=\"([^\"]*)\""
+  ],
+
+  // --- YAML Configuration ---
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.autoIndent": "advanced"
+  },
+
   // --- JSON & JSONC ---
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   // --- Explorer ---
-  "explorer.compactFolders": false,
+  "explorer.compactFolders": false
 }

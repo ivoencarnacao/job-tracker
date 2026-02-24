@@ -7,7 +7,8 @@
             "request": "launch",
             "mainClass": "dev.ivoencarnacao.jobtracker.Application",
             "projectName": "jobtracker",
-            "vmArgs": "-Dspring.profiles.active=local"
+            "vmArgs": "-Dspring.profiles.active=local",
+            "preLaunchTask": "Start Vite"
         }
     ]
 }

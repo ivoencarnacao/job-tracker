@@ -11,16 +11,19 @@
     // Frontend & Node
     "node_modules/**",
     "dist/**",
-    // Logs and others
+    // Logs
     "*.log",
+    // Others
     ".dockerignore",
     ".gitattributes",
     ".gitignore",
     ".prettierrc",
-    "Dockerfile",
+
     "compose.yaml",
+    "Dockerfile",
     "package.json",
     "package-lock.json",
+    "pom.xml",
     "vite.config.js"
   ],
   "words": []

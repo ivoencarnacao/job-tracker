@@ -44,6 +44,26 @@ npx prettier --write "src/main/resources/**/*.{html,css,js,json}"
 - **Frontend assets**: Vite builds `src/main/resources/static/css/application.css` (Tailwind entry point) into `target/classes/static`
 - **Security**: Spring Security (local profile uses admin/admin)
 
+## Clean Architecture
+
+The codebase follows Clean Architecture with DDD Bounded Contexts. Each bounded context is a top-level package under `dev.ivoencarnacao.jobtracker` with four layers:
+
+- **domain/** — Entities, aggregates, value objects, domain services, repository interfaces. Zero framework dependencies. This is the innermost layer.
+- **application/** — Use cases, input/output DTOs, service interfaces. Depends only on `domain`.
+- **infrastructure/** — JPA repository implementations, MapStruct mappers, framework configurations. Depends on `domain` and `application`.
+- **web/** — Controllers, request/response DTOs, view models. Depends on `application`.
+
+**Dependency rule:** Dependencies point inward only. `domain` has no dependencies on other layers. `application` depends only on `domain`. Outer layers (`infrastructure`, `web`) depend on inner layers but never the reverse.
+
+**Bounded Contexts:**
+- `identity/` — User management, authentication, registration
+- `tracking/` — Job application lifecycle, interviews, follow-ups, offers
+- `skills/` — Skill catalog, extraction, normalization, trend analysis
+- `dashboard/` — Read-only query services, metrics, insights
+- `shared/config/` — Cross-cutting configuration (web, security, exception handling)
+
+**Do NOT** use Hexagonal Architecture terminology (ports, adapters) — use Clean Architecture terms (interfaces, implementations, use cases).
+
 ## Profiles
 
 - `local` — Development: Vite dev mode, Thymeleaf cache off, SQL logging, Flyway enabled
@@ -74,3 +94,7 @@ Always use **Conventional Commits** with small, meaningful commits. Format: `typ
 Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, `ci`, `perf`
 
 Subject line only — no body or footer. Keep it concise and self-explanatory.
+
+**Commit by context:** Split commits by bounded context or concern. One commit per logical change — do not bundle unrelated changes together.
+
+**No Co-Authored-By:** Never add `Co-Authored-By` trailers to commit messages.

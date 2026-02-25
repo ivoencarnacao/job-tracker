@@ -26,5 +26,5 @@
     "pom.xml",
     "vite.config.js"
   ],
-  "words": []
+  "words": ["Thymeleaf"]
 }

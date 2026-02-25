@@ -53,7 +53,7 @@ Legend:
   U/D  = Upstream / Downstream
   CF   = Conformist (downstream conforms to upstream's model)
   OHS  = Open Host Service (upstream exposes a clean query interface)
-  ---> = direction of dependency (arrow points to downstream)
+  ---> = data flows from upstream to downstream (arrow points to the consumer/dependent)
 ```
 
 ---

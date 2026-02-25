@@ -65,7 +65,7 @@ The Job Tracker domain decomposes into four subdomains. Classification follows D
 - Response rate calculation
 - Pending follow-ups listing
 - Upcoming interviews listing
-- "No response for X days" warnings
+- "No response" alerts (applications in Applied/Under Review for 14+ days without update)
 - Skills insights presentation (top skills, category breakdown, trends)
 
 **Key Concepts:** Dashboard (read model), ResponseRate (derived metric), Trend (derived insight)
@@ -113,3 +113,7 @@ Application Tracking ──provides data──> Reporting and Dashboard
 Skills and Trends    ──provides data──> Reporting and Dashboard
 Application Tracking ──owns skill link─> Skills and Trends
 ```
+
+## Note on Scope
+
+This subdomain decomposition models the **full domain**, not just MVP P0 features. Skill extraction (P1), auto-ghosting suggestions (P1), and temporal trends (P2) are modeled here because they are part of the domain regardless of delivery priority. See `docs/MVP-SCOPE.md` for the phased delivery plan.

@@ -50,6 +50,7 @@ The PRD and user-facing UI use **Portuguese** terminology. The codebase uses **E
 | Dashboard | Dashboard | The overview screen showing aggregate metrics: total applications, counts by status, response rate, pending follow-ups, upcoming interviews. A read-only projection of domain data. |
 | Tendencia | Trend | A statistical insight derived from skills data: frequency of skills across job postings, changes over time, top categories. |
 | Taxa de Resposta | ResponseRate | The percentage of applications that received any employer response (positive or negative) versus total applications sent. |
+| Alerta de Sem Resposta | NoResponseAlert | A dashboard warning shown when an application has remained in Applied or Under Review for more than 14 days without any status change. Distinct from auto-ghosting (21 days) — this is an earlier heads-up to the user. |
 | Ghosting Automatico | AutoGhosting | A domain rule that suggests marking an application as GHOSTED after 21 days without any status change from APPLIED or UNDER_REVIEW. |
 
 ## Domain Rules
@@ -65,3 +66,4 @@ The PRD and user-facing UI use **Portuguese** terminology. The codebase uses **E
 9. **Skills** are extracted from the job posting description or added manually.
 10. **Skill normalization** ensures variants map to one canonical skill (e.g., "PostgreSQL", "Postgres", "psql" all map to the skill "PostgreSQL").
 11. Each **User** owns all their **JobApplications** -- strict data isolation between users.
+12. A **NoResponseAlert** is shown on the dashboard when an application has been in Applied or Under Review for more than 14 days without update. This is a warning, not a status change. The auto-ghosting suggestion (21 days) is a separate, later trigger.

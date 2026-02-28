@@ -10,13 +10,13 @@
 
 ## Performance
 
-| Metric | Target |
-|--------|--------|
-| Page load (dashboard) | < 2 seconds for datasets up to 500 applications |
-| Page load (application list) | < 2 seconds with filters applied |
-| Search results | < 1 second for text search |
-| Skill extraction | < 3 seconds per job description |
-| Form submission | < 500ms server response time |
+| Metric                       | Target                                          |
+| ---------------------------- | ----------------------------------------------- |
+| Page load (dashboard)        | < 2 seconds for datasets up to 500 applications |
+| Page load (application list) | < 2 seconds with filters applied                |
+| Search results               | < 1 second for text search                      |
+| Skill extraction             | < 3 seconds per job description                 |
+| Form submission              | < 500ms server response time                    |
 
 ## Security and Privacy
 
@@ -46,12 +46,12 @@
 
 ## Browser Support
 
-| Browser | Minimum Version |
-|---------|-----------------|
-| Chrome | Last 2 major versions |
+| Browser | Minimum Version       |
+| ------- | --------------------- |
+| Chrome  | Last 2 major versions |
 | Firefox | Last 2 major versions |
-| Safari | Last 2 major versions |
-| Edge | Last 2 major versions |
+| Safari  | Last 2 major versions |
+| Edge    | Last 2 major versions |
 
 > Mobile browsers (Chrome for Android, Safari for iOS) should work via responsive design. No native app in MVP.
 

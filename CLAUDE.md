@@ -38,6 +38,7 @@ npx prettier --write "src/main/resources/**/*.{html,css,js,json}"
 
 - **Base package**: `dev.ivoencarnacao.jobtracker`
 - **Database**: PostgreSQL 17 via Docker Compose, schema `core`, managed by Flyway migrations in `src/main/resources/db/migration/`
+- **Enums**: Use PostgreSQL native enum types (`CREATE TYPE`). Map in JPA with `@Enumerated(EnumType.STRING)` + Hibernate 6 `PostgreSQLEnumJdbcType`. Never store enums as plain `VARCHAR`.
 - **ORM**: Spring Data JPA with Hibernate (validation mode, no DDL auto-update)
 - **Mapping**: MapStruct 1.6.3 for DTO/entity conversion
 - **Templates**: Thymeleaf with layout dialect, served from `src/main/resources/templates/`
@@ -56,6 +57,7 @@ The codebase follows Clean Architecture with DDD Bounded Contexts. Each bounded 
 **Dependency rule:** Dependencies point inward only. `domain` has no dependencies on other layers. `application` depends only on `domain`. Outer layers (`infrastructure`, `web`) depend on inner layers but never the reverse.
 
 **Bounded Contexts:**
+
 - `identity/` — User management, authentication, registration
 - `tracking/` — Job application lifecycle, interviews, follow-ups, offers
 - `skills/` — Skill catalog, extraction, normalization, trend analysis
@@ -63,6 +65,10 @@ The codebase follows Clean Architecture with DDD Bounded Contexts. Each bounded 
 - `shared/config/` — Cross-cutting configuration (web, security, exception handling)
 
 **Do NOT** use Hexagonal Architecture terminology (ports, adapters) — use Clean Architecture terms (interfaces, implementations, use cases).
+
+**Strict DDD Aggregates:** All write operations on child entities must go through the aggregate root. No separate write repositories for child entities. Read-only query repositories are allowed for cross-aggregate queries (dashboards, lists).
+
+**Cross-Context Communication via Spring Events:** Bounded contexts communicate exclusively via Spring Application Events. Domain events are plain Java records in the publishing context's `domain/event/` package. Publishing uses a `DomainEventPublisher` interface (application layer) implemented by `SpringDomainEventPublisher` (infrastructure layer). Subscribers use `@EventListener` in their `infrastructure/listener/` package. No direct imports of another context's domain model — correlation via primitive IDs only.
 
 ## Profiles
 

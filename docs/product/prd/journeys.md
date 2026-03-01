@@ -1,5 +1,7 @@
 # User Journeys
 
+> For a high-level cross-context flow, see [Global User Journey](../backlog/JOURNEY.md).
+
 ## Journey 1 — First-Time Onboarding
 
 **Trigger:** User discovers the app and wants to start tracking.
@@ -73,7 +75,7 @@
 |------|-------------|-----------------|
 | 1 | Opens "Insights" section | Displays skill analytics dashboard |
 | 2 | Views top skills ranking | Shows skills sorted by frequency across saved postings |
-| 3 | Views category breakdown | Groups skills by category (Languages, Frameworks, Databases, Cloud, DevOps, Testing, Architecture, Tools) |
+| 3 | Views category breakdown | Groups skills by category (Languages, Frameworks, Databases, Cloud, DevOps, Testing, Architecture, Tools, Methodologies, Soft Skills) |
 | 4 | (Optional) Filters by time period (last 30/60 days) | Recalculates frequencies for selected period |
 | 5 | Uses insights to adjust CV or study plan | (No system action — user-driven outcome) |
 

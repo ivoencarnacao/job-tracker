@@ -5,9 +5,9 @@
 | 1      | Foundation + Core CRUD     | ID01-S1, ID01-S2, TR01-S1, TR01-S2 |
 | 2      | Pipeline + Child Entities  | TR01-S3, TR02-S1, TR03-S1, TR03-S2 |
 | 3      | Interviews, Offers, Search | TR04-S1, TR05-S1, TR06-S1, TR06-S2 |
-| 4      | Dashboard                  | DA01-S1, DA01-S2, DA01-S3, TR06-S3 |
+| 4      | Dashboard                  | DA01-S1, DA01-S2, DA01-S3           |
 | 5      | Skills (P1)                | SK01-S1, SK01-S2, SK02-S1, SK02-S2 |
-| 6      | Insights + Ghosting (P1)   | SK03-S1, DA02-S1, TR07-S1, TR07-S2 |
+| 6      | Insights + Ghosting (P1)   | SK03-S1, DA02-S1, TR07-S1, TR07-S2, TR06-S3 |
 
 ## Sprint Details
 
@@ -37,7 +37,6 @@
 - **DA01-S1:** Application count metrics (DashboardQueryRepository, empty state)
 - **DA01-S2:** Response rate, upcoming interviews, pending follow-ups
 - **DA01-S3:** No-response alerts (14-day detection)
-- **TR06-S3:** Date range, additional filters, sort options
 
 ### Sprint 5 — Skills (P1)
 
@@ -46,9 +45,10 @@
 - **SK02-S1:** Skill extraction engine (SkillExtractor, SkillNormalizer, domain event)
 - **SK02-S2:** Extraction results display and manual override
 
-### Sprint 6 — Insights + Ghosting (P1)
+### Sprint 6 — Insights + Ghosting + Advanced Filters (P1)
 
 - **SK03-S1:** Skill frequency and top skills computation (TrendAnalyzer)
 - **DA02-S1:** Insights page (ranked skills, category breakdown)
 - **TR07-S1:** Ghosting detection (GhostingPolicy domain service)
 - **TR07-S2:** Ghosting suggestion UI (dashboard alerts)
+- **TR06-S3:** Date range, additional filters, sort options

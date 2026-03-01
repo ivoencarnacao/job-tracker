@@ -1,5 +1,7 @@
 # Cross-Context Communication (Domain Events)
 
+> This document covers only **cross-context** events (events that cross bounded context boundaries). Each epic defines additional intra-context events documented in the respective slice files.
+
 ## Events
 
 | Event                      | Publisher | Subscriber                             | Trigger                          |

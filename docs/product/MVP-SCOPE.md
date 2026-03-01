@@ -12,7 +12,7 @@ These features are required for the MVP to deliver its core value.
 | Follow-up reminders | Create, list pending, mark complete with outcome |
 | Interview management | Record interviews linked to applications (type, date, notes, outcome) |
 | Offer recording | Record offers linked to applications (salary, status, notes) |
-| Dashboard with core metrics | Total count, count by status, response rate, pending follow-ups, upcoming interviews |
+| Dashboard with core metrics | Total count, count by status, response rate, pending follow-ups, upcoming interviews, no-response alerts |
 | Search and filter | Text search by company/title, filter by status and date |
 
 ## Should Have (P1)
@@ -36,7 +36,7 @@ Nice-to-have features for later iteration within the MVP lifecycle.
 |---------|-------------|
 | Temporal skill trends | Frequency changes over last 30/60 days |
 | Recruiter contact management | Store recruiter details per application |
-| Salary comparison across offers | Side-by-side offer notes |
+| Salary comparison across offers | Side-by-side comparison of offers across different applications |
 | CSV export | Export application data for external use |
 | Filter by source and work mode | Additional filter dimensions |
 

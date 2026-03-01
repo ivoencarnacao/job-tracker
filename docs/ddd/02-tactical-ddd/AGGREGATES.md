@@ -15,6 +15,7 @@
 
 **JobApplication** (aggregate root)
 - Fields: id (UUID), userId, title, companyName, location, workMode, postingUrl, postingDescription, appliedAt, source, status, salaryMin, salaryMax, salaryCurrency, contractType, recruiterName, recruiterCompany, recruiterEmail, notes, createdAt, updatedAt
+- Recruiter data is stored as flat fields rather than a separate value object. The three fields (name, company, email) are always read/written together with the JobApplication and do not have standalone behavior or validation beyond individual field formats.
 - Child entities (managed through aggregate root):
   - **Interview** — scheduledAt, type, format, interviewers, preparationNotes, outcome
   - **FollowUp** — dueDate, note, completed, outcome
@@ -41,3 +42,10 @@
   - Alias must be unique (one alias maps to one skill)
   - Every skill has a category
 - Repository: `SkillRepository` — findByName, findByAlias, findAll, findByCategory
+
+**JobSkill** (cross-context association)
+- Fields: id (UUID), applicationId (UUID, from Tracking), skillId (UUID, from Skills)
+- Owned by the Skills context — the `job_application_skills` table is managed by the Skills context's application layer
+- Created when processing `JobDescriptionUpdated` / `JobApplicationCreated` events (auto-extraction) or when the user manually tags skills
+- applicationId is a primitive UUID correlation identifier — no import of Tracking domain model
+- Repository: `JobSkillRepository` — save, deleteByApplicationId, findByApplicationId

@@ -4,8 +4,14 @@
 
 | Event | Record Fields | Publisher | Subscriber | Trigger |
 |-------|---------------|-----------|------------|---------|
+| `UserRegistered` | userId (UUID), email (String) | Identity | (analytics) | Successful registration |
+| `JobApplicationCreated` | applicationId (UUID), userId (UUID), hasDescription (boolean) | Tracking | Skills (conditional extraction) | Application saved |
 | `JobDescriptionUpdated` | applicationId (UUID), description (String) | Tracking | Skills (extraction) | Description saved/updated |
-| `ApplicationStatusChanged` | applicationId (UUID), previousStatus (String), newStatus (String) | Tracking | Dashboard (future) | Status transition |
+| `ApplicationStatusChanged` | applicationId (UUID), previousStatus (String), newStatus (String) | Tracking | Dashboard (metrics) | Status transition |
+| `FollowUpScheduled` | applicationId (UUID), dueDate (LocalDate) | Tracking | Dashboard (pending follow-ups) | Follow-up created |
+| `FollowUpCompleted` | applicationId (UUID), outcome (String) | Tracking | Dashboard (metrics) | Follow-up marked complete |
+| `InterviewScheduled` | applicationId (UUID), scheduledAt (Instant), type (String) | Tracking | Dashboard (upcoming interviews) | Interview created |
+| `OfferReceived` | applicationId (UUID), offerDate (LocalDate) | Tracking | Dashboard (offer tracking) | Offer recorded |
 
 ## Event Pattern (Clean Architecture)
 

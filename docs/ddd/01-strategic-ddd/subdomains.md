@@ -45,7 +45,7 @@ The Job Tracker domain decomposes into four subdomains. Classification follows D
 - Skill normalization (mapping variants to canonical names)
 - Association of skills to job applications (JobSkill)
 - Frequency and trend computation (top skills, category breakdown, temporal trends over 30/60 days)
-- Skill category taxonomy (Language, Framework, Database, Cloud, DevOps, Testing, Architecture, Tool, Methodology)
+- Skill category taxonomy (Language, Framework, Database, Cloud, DevOps, Testing, Architecture, Tool, Methodology, Soft Skill)
 
 **Key Entities:** Skill (aggregate root), SkillCategory (enum/value object), JobSkill
 

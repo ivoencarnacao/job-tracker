@@ -58,7 +58,7 @@ The PRD and user-facing UI use **Portuguese** terminology. The codebase uses **E
 1. A **JobApplication** starts as **Saved** or **Applied**.
 2. A **Saved** application transitions to **Applied** when the user submits it.
 3. **Ghosted** can be **auto-suggested** when an application remains in Applied or Under Review for more than 21 days without update.
-4. **Terminal states** are: Rejected, Ghosted, Withdrawn, and Offer (when accepted or declined).
+4. **Terminal states** are: Rejected, Ghosted, and Withdrawn. **Offer** is not terminal — it can transition to Rejected or Withdrawn.
 5. **Ghosted** is reversible: if the employer responds, the application can transition to a new active state.
 6. An **Interview** always belongs to exactly one **JobApplication**.
 7. A **FollowUp** always belongs to exactly one **JobApplication**.

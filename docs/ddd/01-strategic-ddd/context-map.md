@@ -22,7 +22,7 @@
 |  +----+-------------+         +------------------------+            |
 |  |                   |  U/D   |                        |            |
 |  | Tracking Context  +------->|   Skills Context       |            |
-|  |                   |  (CF)  |                        |            |
+|  |                   |  (CS)  |                        |            |
 |  | [CORE]            |        |   [CORE]               |            |
 |  |                   |        |                        |            |
 |  | - JobApplication  |        |   - Skill              |            |
@@ -52,6 +52,7 @@
 Legend:
   U/D  = Upstream / Downstream
   CF   = Conformist (downstream conforms to upstream's model)
+  CS   = Customer-Supplier (upstream publishes events, downstream consumes independently)
   OHS  = Open Host Service (upstream exposes a clean query interface)
   ---> = data flows from upstream to downstream (arrow points to the consumer/dependent)
 ```
@@ -70,11 +71,11 @@ The Tracking context references `userId` from the Identity context to scope all 
 
 Same pattern as above. Skills data (JobSkill associations and trend queries) are scoped per user.
 
-### Tracking (upstream) --> Skills (downstream): Conformist
+### Tracking (upstream) --> Skills (downstream): Customer-Supplier
 
-The Skills context needs access to job application data (specifically the job description text and the application ID) to extract and associate skills. The Skills context conforms to the Tracking context's model -- it reads JobApplication data as-is.
+The Skills context needs job description text and the application ID to extract and associate skills. Tracking publishes domain events (`JobDescriptionUpdated`, `JobApplicationCreated`) containing primitive data, and Skills consumes them independently with its own domain logic. Skills does not conform to or import Tracking's model — it receives only primitive fields (UUID, String) via events.
 
-**In practice (MVP monolith):** The Skills context receives the job description as a String parameter and the application ID when called. It does not import Tracking's aggregate classes directly. Instead, the application layer passes the needed data.
+**In practice (MVP monolith):** The Tracking context publishes `JobDescriptionUpdated` events via `DomainEventPublisher`. The Skills context subscribes with `@EventListener` in its `infrastructure/listener/` package, receiving the application ID and description text as primitives. The Skills context then runs its own extraction logic.
 
 ### Tracking (upstream) --> Dashboard (downstream): Open Host Service
 

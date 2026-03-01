@@ -4,6 +4,19 @@ All notable changes to project documentation are documented in this file.
 
 ---
 
+## 2026-03-01 — Combined product and implementation roadmap
+
+Added `docs/product/ROADMAP.md` — a single document that synthesizes MVP-SCOPE, GTM-STRATEGY, EPIC-MAP, JOURNEY, and METRICS-PLAN into a unified view.
+
+- Sprint plan (Sprints 1-6) with slice assignments, Flyway versions, and deliverables per sprint
+- Dependency map showing blocking relationships between all 23 slices
+- Launch phases (Private Beta → Open Beta → Public Launch) with entry gates and success criteria
+- Release criteria checklist (functional, technical, operational)
+- Metrics by phase (product metrics, acquisition metrics, hypothesis validation schedule)
+- Future backlog (P2 features)
+
+---
+
 ## 2026-03-01 — Cross-document consistency fixes
 
 Reviewed product docs, strategic DDD, and tactical DDD for consistency. Fixed 7 inconsistencies (5 major, 2 moderate).

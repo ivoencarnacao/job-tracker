@@ -5,7 +5,7 @@
 | [JOURNEY.md](JOURNEY.md) | End-to-end user journey across all bounded contexts |
 | [EPIC-MAP.md](EPIC-MAP.md) | All epics organized by bounded context with priorities |
 | [DEPENDENCY-GRAPH.md](DEPENDENCY-GRAPH.md) | Slice-level dependency graph |
-| [SPRINTS.md](SPRINTS.md) | Implementation order grouped by sprint |
+| [SPRINTS.md](SPRINTS.md) | Delivery plan with vertical slice ordering |
 | [FUTURE.md](FUTURE.md) | Future backlog items beyond MVP |
 
 > Technical documentation (migrations, domain events, ADRs) is maintained in [docs/architecture/](../../architecture/).

@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-ID01](EPIC-ID01-user-registration.md)
 **Priority:** P0
-**Sprint:** 1
+**Vertical Slice:** VS-01
 
 ---
 

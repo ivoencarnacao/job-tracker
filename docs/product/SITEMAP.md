@@ -10,15 +10,15 @@
 
 ## Authenticated Pages
 
-| Route | Page | Sprint | Purpose |
-|-------|------|--------|---------|
-| `/dashboard` | Dashboard | 4 | Core metrics, alerts, upcoming activity |
-| `/applications` | Application list | 1 | Browse, search, filter applications |
-| `/applications/new` | Create application | 1 | New application form |
-| `/applications/{id}` | Application detail | 1 | Full view with child entities |
-| `/applications/{id}/edit` | Edit application | 1 | Pre-populated edit form |
-| `/applications/{id}/delete` | Delete confirmation | 2 | Cascade impact warning |
-| `/insights` | Skill insights | 6 (P1) | Top skills, category breakdown |
+| Route | Page | Vertical Slice | Purpose |
+|-------|------|----------------|---------|
+| `/dashboard` | Dashboard | VS-07 | Core metrics, alerts, upcoming activity |
+| `/applications` | Application list | VS-02 | Browse, search, filter applications |
+| `/applications/new` | Create application | VS-02 | New application form |
+| `/applications/{id}` | Application detail | VS-02 | Full view with child entities |
+| `/applications/{id}/edit` | Edit application | VS-02 | Pre-populated edit form |
+| `/applications/{id}/delete` | Delete confirmation | VS-03 | Cascade impact warning |
+| `/insights` | Skill insights | VS-11 (P1) | Top skills, category breakdown |
 
 ## Primary Navigation
 
@@ -26,7 +26,7 @@
 [Logo/Home] — [Dashboard] — [Applications] — [Insights*] — [Logout]
 ```
 
-> *Insights appears only after Skills context is implemented (Sprint 5+).
+> *Insights appears only after Skills context is implemented (VS-09+).
 
 ## Navigation Flow
 
@@ -52,13 +52,13 @@ Landing (/) → Register → Login → Dashboard
 
 These are not separate pages — they are sections and actions within the application detail page.
 
-| Section | Actions | Sprint |
-|---------|---------|--------|
-| Status | Dropdown with valid transitions → PATCH /applications/{id}/status | 2 |
-| Follow-ups | Add form + list (ordered by due date, overdue highlighted) | 2 |
-| Interviews | Add form + list (type, date, outcome) | 3 |
-| Offer | Create or edit form (1-to-1, adapts based on existence) | 3 |
-| Skills | Tag dropdown + chips with remove buttons | 5 (P1) |
+| Section | Actions | Vertical Slice |
+|---------|---------|----------------|
+| Status | Dropdown with valid transitions → PATCH /applications/{id}/status | VS-03 |
+| Follow-ups | Add form + list (ordered by due date, overdue highlighted) | VS-04 |
+| Interviews | Add form + list (type, date, outcome) | VS-05 |
+| Offer | Create or edit form (1-to-1, adapts based on existence) | VS-05 |
+| Skills | Tag dropdown + chips with remove buttons | VS-09 (P1) |
 
 ## API Routes (Non-Page)
 

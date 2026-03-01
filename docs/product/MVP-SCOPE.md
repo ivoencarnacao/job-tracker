@@ -93,7 +93,7 @@ The MVP is ready for Private Beta (10-20 testers) when all of the following are 
 
 **Functional:**
 
-- [ ] Sprints 1-4 complete (all P0 slices implemented and tested)
+- [ ] VS-01 through VS-07 complete (all P0 slices implemented and tested)
 - [ ] All acceptance criteria for P0 slices verified
 - [ ] Dashboard displays correct metrics with real data
 - [ ] End-to-end flow works: register → login → create application → update status → view dashboard

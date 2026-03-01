@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-TR05](EPIC-TR05-offers.md)
 **Priority:** P0
-**Sprint:** 3
+**Vertical Slice:** VS-05
 
 ---
 

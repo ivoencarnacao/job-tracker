@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-TR04](EPIC-TR04-interviews.md)
 **Priority:** P0
-**Sprint:** 3
+**Vertical Slice:** VS-05
 
 ---
 

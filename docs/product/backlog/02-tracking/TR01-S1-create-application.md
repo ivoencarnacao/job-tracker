@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-TR01](EPIC-TR01-application-crud.md)
 **Priority:** P0
-**Sprint:** 1
+**Vertical Slice:** VS-02
 
 ---
 

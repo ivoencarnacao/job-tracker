@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-SK01](EPIC-SK01-skill-catalog.md)
 **Priority:** P1
-**Sprint:** 5
+**Vertical Slice:** VS-09
 
 ---
 

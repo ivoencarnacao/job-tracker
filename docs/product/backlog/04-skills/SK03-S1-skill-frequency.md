@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-SK03](EPIC-SK03-skill-insights.md)
 **Priority:** P1
-**Sprint:** 6
+**Vertical Slice:** VS-11
 
 ---
 

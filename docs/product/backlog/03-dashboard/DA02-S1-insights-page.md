@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-DA02](EPIC-DA02-skill-insights-view.md)
 **Priority:** P1
-**Sprint:** 6
+**Vertical Slice:** VS-11
 
 ---
 

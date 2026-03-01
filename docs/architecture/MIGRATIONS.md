@@ -2,16 +2,16 @@
 
 All migrations target the `core` schema. See [DATA-SCHEMA-DETAIL.md](../schema/DATA-SCHEMA-DETAIL.md) for column-level specifications.
 
-| Version | File | Context | Sprint | Description |
-|---------|------|---------|--------|-------------|
-| V1 | `V1__create_users_table.sql` | Identity | 1 | Users table with email uniqueness |
-| V2 | `V2__create_job_applications_table.sql` | Tracking | 1 | Job applications with all fields, check constraints, indexes |
-| V3 | `V3__create_follow_ups_table.sql` | Tracking | 2 | Follow-ups table with due date and outcome |
-| V4 | `V4__create_interviews_table.sql` | Tracking | 3 | Interviews table with type, format, outcome |
-| V5 | `V5__create_offers_table.sql` | Tracking | 3 | Offers table with UNIQUE constraint on application |
-| V6 | `V6__create_skills_tables.sql` | Skills | 5 | Skills + skill_aliases tables |
-| V7 | `V7__seed_skill_catalog.sql` | Skills | 5 | Seed ~100 skills with aliases across 10 categories |
-| V8 | `V8__create_job_application_skills_table.sql` | Skills | 5 | Join table (composite PK) |
+| Version | File | Context | Vertical Slice | Description |
+|---------|------|---------|----------------|-------------|
+| V1 | `V1__create_schema.sql` | Shared | VS-00 | Create `core` schema |
+| V2 | `V2__create_users_table.sql` | Identity | VS-01 | Users table with email uniqueness |
+| V3 | `V3__create_job_applications_table.sql` | Tracking | VS-02 | Job applications with all fields, check constraints, indexes |
+| V4 | `V4__create_follow_ups_table.sql` | Tracking | VS-04 | Follow-ups table with due date and outcome |
+| V5 | `V5__create_interviews_table.sql` | Tracking | VS-05 | Interviews table with type, format, outcome |
+| V6 | `V6__create_offers_table.sql` | Tracking | VS-05 | Offers table with UNIQUE constraint on application |
+| V7 | `V7__create_skills_tables.sql` | Skills | VS-09 | Skills + skill_aliases tables |
+| V8 | `V8__create_job_application_skills_table.sql` | Skills | VS-09 | Join table (composite PK) |
 
 ## Conventions
 

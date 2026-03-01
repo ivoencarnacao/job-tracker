@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-TR02](EPIC-TR02-pipeline-management.md)
 **Priority:** P0
-**Sprint:** 2
+**Vertical Slice:** VS-03
 
 ---
 

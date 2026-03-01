@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-TR03](EPIC-TR03-follow-ups.md)
 **Priority:** P0
-**Sprint:** 2
+**Vertical Slice:** VS-04
 
 ---
 

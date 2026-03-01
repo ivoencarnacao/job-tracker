@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-DA01](EPIC-DA01-core-metrics.md)
 **Priority:** P0
-**Sprint:** 4
+**Vertical Slice:** VS-07
 
 ---
 

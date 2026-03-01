@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-SK02](EPIC-SK02-skill-extraction.md)
 **Priority:** P1
-**Sprint:** 5
+**Vertical Slice:** VS-10
 
 ---
 

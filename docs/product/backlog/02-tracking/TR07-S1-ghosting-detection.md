@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-TR07](EPIC-TR07-ghosting-policy.md)
 **Priority:** P1
-**Sprint:** 6
+**Vertical Slice:** VS-08
 
 ---
 

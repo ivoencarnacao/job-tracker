@@ -8,7 +8,7 @@ All notable changes to project documentation are documented in this file.
 
 Added `docs/product/ROADMAP.md` — a single document that synthesizes MVP-SCOPE, GTM-STRATEGY, EPIC-MAP, JOURNEY, and METRICS-PLAN into a unified view.
 
-- Sprint plan (Sprints 1-6) with slice assignments, Flyway versions, and deliverables per sprint
+- Vertical slice plan (VS-00 through VS-11) with slice assignments, Flyway versions, and deliverables per week
 - Dependency map showing blocking relationships between all 23 slices
 - Launch phases (Private Beta → Open Beta → Public Launch) with entry gates and success criteria
 - Release criteria checklist (functional, technical, operational)

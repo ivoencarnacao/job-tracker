@@ -2,7 +2,7 @@
 
 **Epic:** [EPIC-TR06](EPIC-TR06-search-and-filter.md)
 **Priority:** P0
-**Sprint:** 3
+**Vertical Slice:** VS-06
 
 ---
 

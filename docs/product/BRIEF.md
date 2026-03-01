@@ -29,6 +29,8 @@ The MVP launches as entirely free to validate product-market fit before introduc
 
 ## Success Metrics
 
+> For precise definitions, formulas, and instrumentation details, see [Metrics Plan](METRICS-PLAN.md).
+
 | Metric | Target | Why It Matters |
 |--------|--------|----------------|
 | Applications created (first week) | 10+ per user | Validates the core value of easy tracking |

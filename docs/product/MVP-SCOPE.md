@@ -71,6 +71,8 @@ Explicitly excluded from the MVP to maintain focus.
 
 ## MVP Metrics
 
+> For precise definitions, formulas, and instrumentation details, see [Metrics Plan](METRICS-PLAN.md).
+
 | Metric | Target | Measurement |
 |--------|--------|-------------|
 | Applications per user (week 1) | 10+ | Count applications created within 7 days of registration |
@@ -80,3 +82,32 @@ Explicitly excluded from the MVP to maintain focus.
 | Insights page visits | >25% of users | Users who visited the Insights section at least once |
 | Known final state | >60% of applications | Applications in a terminal state (Offer, Rejected, Ghosted, Withdrawn) |
 | Time to first value | < 3 minutes | Time from registration to first application + dashboard view |
+
+---
+
+## Release Criteria
+
+### Private Beta
+
+The MVP is ready for Private Beta (10-20 testers) when all of the following are met:
+
+**Functional:**
+
+- [ ] Sprints 1-4 complete (all P0 slices implemented and tested)
+- [ ] All acceptance criteria for P0 slices verified
+- [ ] Dashboard displays correct metrics with real data
+- [ ] End-to-end flow works: register → login → create application → update status → view dashboard
+
+**Technical:**
+
+- [ ] JaCoCo ≥ 70% line coverage
+- [ ] Zero critical vulnerabilities (CSRF, XSS, SQL injection, IDOR)
+- [ ] Performance: dashboard < 2s, form submission < 500ms
+- [ ] Flyway migrations V1-V5 execute without errors
+
+**Operational:**
+
+- [ ] Functional deploy on staging environment
+- [ ] Database backup configured
+- [ ] In-app feedback widget integrated (simple text form)
+- [ ] Analytics (Plausible/Umami) configured and capturing events

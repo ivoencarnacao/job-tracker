@@ -71,6 +71,8 @@ Document the development process through regular blog posts:
 
 ## Acquisition Measurement
 
+> For precise metric definitions and instrumentation details, see [Metrics Plan](METRICS-PLAN.md).
+
 ### Registration Funnel
 
 ```

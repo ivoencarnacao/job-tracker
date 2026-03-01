@@ -40,7 +40,9 @@ As an **authenticated User**, I want to **view the full details of a specific jo
 - The `JobApplication` aggregate is successfully updated and persisted in the database.
 - The UI redirects the user back to the detail view with a success message.
 
-**Scenario 3: Domain Event Publication on Update**
+**Scenario 3: Domain Event Publication on Update** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - The user updates the text within the job description field.
 - Upon successful persistence, the system publishes the `JobDescriptionUpdated` domain event, allowing downstream contexts to re-parse or re-index the updated description.
@@ -64,7 +66,7 @@ As an **authenticated User**, I want to **view the full details of a specific jo
 - [ ] Create `tracking/application/UpdateJobApplicationUseCase.java`
   - Loads the application, verifies ownership, applies the update via the aggregate's `update` method.
   - Saves the updated aggregate.
-  - Evaluates if the description changed and publishes `JobDescriptionUpdated` if true.
+  - *(P1)* Evaluates if the description changed and publishes `JobDescriptionUpdated` if true.
 
 ### Web / UI
 

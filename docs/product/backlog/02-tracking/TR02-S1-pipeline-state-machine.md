@@ -47,7 +47,9 @@ As an **authenticated User**, I want to **update the status of my job applicatio
 - When the user opens the status update dropdown in the detail or edit view.
 - The dropdown only displays the valid target states based on the application's current state (provided by the `PipelineService`).
 
-**Scenario 5: Domain Event Publication**
+**Scenario 5: Domain Event Publication** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - Upon successfully persisting the new status, the system publishes the `ApplicationStatusChanged` domain event, including the `applicationId`, `previousStatus`, and `newStatus`.
 
@@ -61,7 +63,7 @@ As an **authenticated User**, I want to **update the status of my job applicatio
   - Method `validateTransition(currentStatus, newStatus)` — throws a domain exception if the transition is invalid.
   - Method `getValidTransitions(currentStatus)` — returns a set of allowed target states.
   - Implement rules: Block transitions FROM `REJECTED`/`WITHDRAWN`; allow FROM `GHOSTED` to any active state; allow flexible transitions between non-terminal states.
-- [ ] Create `tracking/domain/event/ApplicationStatusChanged.java`
+- [ ] *(P1)* Create `tracking/domain/event/ApplicationStatusChanged.java`
   - Plain Java record representing the event: `(UUID applicationId, String previousStatus, String newStatus)`.
 
 ### Application
@@ -71,7 +73,7 @@ As an **authenticated User**, I want to **update the status of my job applicatio
   - Loads the `JobApplication` and verifies ownership via `AuthenticatedUser`.
   - Delegates the transition validation to `PipelineService`.
   - Updates the aggregate and saves it.
-  - Publishes the `ApplicationStatusChanged` domain event.
+  - *(P1)* Publishes the `ApplicationStatusChanged` domain event.
 
 ### Web / UI
 

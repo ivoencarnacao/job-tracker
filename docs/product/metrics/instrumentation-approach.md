@@ -1,8 +1,8 @@
 # Instrumentation Approach
 
-## Server-Side (Domain Events)
+## Server-Side (Domain Events — P1)
 
-Most events align naturally with existing domain events in the backlog:
+Most analytics events align naturally with domain events in the backlog. Domain event infrastructure is deferred to P1 (see [architecture/FUTURE.md](../../architecture/FUTURE.md)). In the MVP, server-side metrics can be derived from existing domain tables via SQL queries.
 
 | Application Event | Domain Event Source |
 |-------------------|-------------------|

@@ -20,7 +20,7 @@ Users need to update the application status as the hiring process progresses. Th
 - `OFFER` can transition to `REJECTED` or `WITHDRAWN` (e.g., employer rescinds the offer or the user declines it).
 - A domain service (`PipelineService`) or the Aggregate Root itself enforces these valid state transitions.
 - Any status change automatically updates the `updated_at` timestamp of the application.
-- A successful status change must publish the `ApplicationStatusChanged` domain event to notify other contexts (e.g., Analytics, Notifications).
+- *(P1)* A successful status change must publish the `ApplicationStatusChanged` domain event to notify other contexts (e.g., Analytics, Notifications).
 
 ### Ubiquitous Language
 

@@ -21,7 +21,7 @@ Users need a structured way to record formal job offers so they can evaluate, co
 - **Negotiation Flow:** Rather than creating a new offer entity for counter-offers, the user updates the existing offer. The `notes` field is used to capture the negotiation history and details.
 - **Crucial Decoupling:** Recording or updating an offer does NOT automatically change the overall `JobApplication` status to `OFFER`. The user remains in full control of the pipeline state machine.
 - **Aggregate Enforcement:** All write operations (create, update, change status) must go through the `JobApplication` aggregate root to ensure absolute data consistency.
-- Key actions publish domain events (e.g., `OfferReceived`, `OfferUpdated`, `OfferStatusChanged`) to allow downstream contexts (like an Analytics or Compensation benchmarking module) to react asynchronously.
+- *(P1)* Key actions publish domain events (e.g., `OfferReceived`, `OfferUpdated`, `OfferStatusChanged`) to allow downstream contexts (like an Analytics or Compensation benchmarking module) to react asynchronously.
 
 ### Ubiquitous Language
 

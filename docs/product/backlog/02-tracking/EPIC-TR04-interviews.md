@@ -20,7 +20,7 @@ Users need to record and manage interviews to prepare effectively and track thei
 - **Crucial Decoupling:** Creating or updating an interview does NOT automatically change the `JobApplication` status. The user remains in full manual control of the pipeline state machine.
 - `InterviewOutcome` has three valid states: `PENDING`, `PASSED`, or `FAILED`.
 - **Aggregate Enforcement:** All write operations (create, update, outcome registration) must go through the `JobApplication` aggregate root to ensure absolute data consistency.
-- Key actions publish domain events (e.g., `InterviewScheduled`, `InterviewUpdated`) to allow downstream contexts (like a Calendar Integration or Notifications module) to react asynchronously.
+- *(P1)* Key actions publish domain events (e.g., `InterviewScheduled`, `InterviewUpdated`) to allow downstream contexts (like a Calendar Integration or Notifications module) to react asynchronously.
 
 ### Ubiquitous Language
 

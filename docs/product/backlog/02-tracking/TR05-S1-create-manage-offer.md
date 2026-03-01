@@ -50,7 +50,9 @@ As an **authenticated User**, I want to **record and manage a job offer for my a
 - Creating or updating an offer does NOT automatically change the `JobApplication`'s overall `ApplicationStatus` (e.g., to `OFFER`).
 - The user retains full manual control over the pipeline state machine.
 
-**Scenario 5: Domain Event Publication**
+**Scenario 5: Domain Event Publication** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - Upon successfully registering a new offer, the system publishes an `OfferReceived` domain event.
 - Upon updating an existing offer (e.g., changing its status or salary), the system publishes an `OfferUpdated` domain event.
@@ -78,15 +80,15 @@ As an **authenticated User**, I want to **record and manage a job offer for my a
 - [ ] Update `tracking/domain/JobApplication.java` (Aggregate Root)
   - Add `addOffer(Offer offer)` method (must verify that the internal offer reference is currently null).
   - Add `updateOffer(...)` method to apply changes to the existing offer.
-- [ ] Create Domain Events: `tracking/domain/event/OfferReceived.java` and `OfferUpdated.java`.
+- [ ] *(P1)* Create Domain Events: `tracking/domain/event/OfferReceived.java` and `OfferUpdated.java`.
 
 ### Application
 
 - [ ] Create DTOs `AddOfferInput.java`, `UpdateOfferInput.java`, and `OfferOutput.java`.
 - [ ] Create `tracking/application/AddOfferUseCase.java`
-  - Loads `JobApplication`, verifies ownership, calls `addOffer()`, saves aggregate, and publishes `OfferReceived`.
+  - Loads `JobApplication`, verifies ownership, calls `addOffer()`, and saves aggregate. *(P1: publishes `OfferReceived`.)*
 - [ ] Create `tracking/application/UpdateOfferUseCase.java`
-  - Loads `JobApplication`, verifies ownership, calls `updateOffer()`, saves aggregate, and publishes `OfferUpdated`.
+  - Loads `JobApplication`, verifies ownership, calls `updateOffer()`, and saves aggregate. *(P1: publishes `OfferUpdated`.)*
 - [ ] Create `tracking/application/GetOfferUseCase.java`
   - Loads the `JobApplication` by ID and returns its parsed offer as a DTO (if it exists).
 

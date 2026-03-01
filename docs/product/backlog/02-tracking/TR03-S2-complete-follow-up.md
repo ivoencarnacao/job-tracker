@@ -39,7 +39,9 @@ As an **authenticated User**, I want to **mark a pending follow-up as complete b
 - The system enforces that an outcome is strictly required to mark a follow-up as complete.
 - The `FollowUp` is never updated directly via an independent repository; the state change must pass through the `JobApplication.completeFollowUp(...)` method to guarantee aggregate consistency.
 
-**Scenario 3: Domain Event Publication**
+**Scenario 3: Domain Event Publication** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - Upon successfully persisting the aggregate with the completed follow-up, the system publishes a `FollowUpCompleted` domain event (including the `followUpId`, `applicationId`, and `outcome`).
 
@@ -52,14 +54,14 @@ As an **authenticated User**, I want to **mark a pending follow-up as complete b
 - [ ] Update `tracking/domain/JobApplication.java` (Aggregate Root)
   - Add `completeFollowUp(UUID followUpId, FollowUpOutcome outcome)` method.
   - The method must find the correct child entity, apply the changes (set `completed = true` and update the `outcome`), and throw a domain exception if the follow-up is not found or already completed.
-- [ ] Create `tracking/domain/event/FollowUpCompleted.java` (Domain Event)
+- [ ] *(P1)* Create `tracking/domain/event/FollowUpCompleted.java` (Domain Event)
 
 ### Application
 
 - [ ] Create DTO `tracking/application/dto/CompleteFollowUpInput.java` (Requires `outcome`).
 - [ ] Create `tracking/application/CompleteFollowUpUseCase.java`
   - Loads the `JobApplication`, verifies ownership via `AuthenticatedUser`.
-  - Calls `completeFollowUp()`, saves the aggregate, and publishes the event.
+  - Calls `completeFollowUp()`, and saves the aggregate. *(P1: publishes the event.)*
 
 ### Web / UI
 

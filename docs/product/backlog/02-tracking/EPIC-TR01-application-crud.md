@@ -20,7 +20,7 @@ Users need a central place to register job applications so they do not lose trac
 - If both are provided, the minimum salary must be less than or equal to the maximum salary.
 - Duplicate applications (same job title + company for the same user) are allowed but must trigger a UI warning.
 - Deleting a `JobApplication` cascades to all internal child entities within the aggregate (Interviews, FollowUps, Offers, JobSkills).
-- Key lifecycle changes (creation, deletion, or description updates) publish domain events (e.g., `JobApplicationCreated`, `JobDescriptionUpdated`, `JobApplicationDeleted`) to enable asynchronous integration with other bounded contexts.
+- *(P1)* Key lifecycle changes (creation, deletion, or description updates) publish domain events (e.g., `JobApplicationCreated`, `JobDescriptionUpdated`, `JobApplicationDeleted`) to enable asynchronous integration with other bounded contexts.
 
 ### Ubiquitous Language
 

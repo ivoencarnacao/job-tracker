@@ -44,7 +44,9 @@ As an **authenticated User**, I want to **add, view, and update interviews assoc
 - The system strictly verifies that the parent `JobApplication` belongs to the currently authenticated user (`userId` check).
 - The `Interview` is never saved or updated directly via an independent repository; all state changes pass through the `JobApplication.addInterview(...)` and `JobApplication.updateInterviewOutcome(...)` methods.
 
-**Scenario 4: Domain Event Publication**
+**Scenario 4: Domain Event Publication** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - Upon successfully persisting the aggregate with the new interview, the system publishes an `InterviewScheduled` domain event.
 - Upon successfully updating the outcome of an existing interview, the system publishes an `InterviewOutcomeUpdated` domain event.
@@ -72,15 +74,15 @@ As an **authenticated User**, I want to **add, view, and update interviews assoc
 - [ ] Update `tracking/domain/JobApplication.java` (Aggregate Root)
   - Add `addInterview(Interview interview)` method.
   - Add `updateInterviewOutcome(UUID interviewId, InterviewOutcome outcome)` method.
-- [ ] Create Domain Events: `tracking/domain/event/InterviewScheduled.java` and `InterviewOutcomeUpdated.java`.
+- [ ] *(P1)* Create Domain Events: `tracking/domain/event/InterviewScheduled.java` and `InterviewOutcomeUpdated.java`.
 
 ### Application
 
 - [ ] Create DTOs `AddInterviewInput.java`, `UpdateInterviewInput.java`, and `InterviewOutput.java`.
 - [ ] Create `tracking/application/AddInterviewUseCase.java`
-  - Loads `JobApplication`, verifies ownership, calls `addInterview()`, saves aggregate, and publishes `InterviewScheduled`.
+  - Loads `JobApplication`, verifies ownership, calls `addInterview()`, and saves aggregate. *(P1: publishes `InterviewScheduled`.)*
 - [ ] Create `tracking/application/UpdateInterviewUseCase.java`
-  - Loads `JobApplication`, verifies ownership, calls `updateInterviewOutcome()`, saves aggregate, and publishes `InterviewOutcomeUpdated`.
+  - Loads `JobApplication`, verifies ownership, calls `updateInterviewOutcome()`, and saves aggregate. *(P1: publishes `InterviewOutcomeUpdated`.)*
 - [ ] Create `tracking/application/ListInterviewsUseCase.java`
   - Loads the `JobApplication` by ID and returns its parsed interviews as a DTO list.
 

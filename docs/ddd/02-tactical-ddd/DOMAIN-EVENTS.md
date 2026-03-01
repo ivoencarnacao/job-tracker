@@ -1,5 +1,9 @@
 # Domain Events
 
+## Phasing
+
+All domain events listed below are **P1 (Post-MVP)** scope. In the MVP, the Dashboard context uses **Open Host Service** (direct read-only queries against Tracking tables) instead of consuming events. Domain events will be introduced when the Skills context enters in P1 (VS-09/VS-10), as Skills needs to react to Tracking writes (`JobDescriptionUpdated`, `JobApplicationCreated`).
+
 ## Events
 
 | Event | Record Fields | Publisher | Subscriber | Trigger |
@@ -31,4 +35,4 @@ Subscribing Context:
 - Events live in the publishing context's `domain/event/` package
 - Subscribers live in the subscribing context's `infrastructure/listener/` package
 - Only primitive data in events (UUIDs, Strings) — no domain objects cross boundaries
-- Synchronous in MVP (same thread, same transaction)
+- Synchronous when introduced in P1 (same thread, same transaction)

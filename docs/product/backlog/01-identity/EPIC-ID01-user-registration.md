@@ -19,7 +19,7 @@ The system is multi-user with strict data isolation. Without authentication, the
 - After registration, the User is automatically logged in and redirected to the Dashboard.
 - A logged-in User can only see and modify their own data (strict data isolation).
 - Duplicate email registration shows an error and suggests login.
-- Upon successful registration, the system publishes a `UserRegistered` domain event to notify other bounded contexts.
+- *(P1)* Upon successful registration, the system publishes a `UserRegistered` domain event to notify other bounded contexts.
 
 ### Ubiquitous Language
 

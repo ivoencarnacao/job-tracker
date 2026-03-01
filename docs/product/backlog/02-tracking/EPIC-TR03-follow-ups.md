@@ -20,7 +20,7 @@ Applications often go stale when users forget to follow up with recruiters or hi
 - Past-date follow-ups are allowed (retroactive recording) and must appear immediately as overdue in the UI.
 - Marking a follow-up as completed strictly requires selecting an outcome.
 - **Aggregate Enforcement:** All write operations (create, complete, update) must go through the `JobApplication` aggregate root to ensure consistency. `FollowUps` cannot be fetched or saved independently of their parent application.
-- Key actions publish domain events (e.g., `FollowUpScheduled`, `FollowUpCompleted`) to allow downstream contexts (like a Notifications module) to react accordingly.
+- *(P1)* Key actions publish domain events (e.g., `FollowUpScheduled`, `FollowUpCompleted`) to allow downstream contexts (like a Notifications module) to react accordingly.
 
 ### Ubiquitous Language
 

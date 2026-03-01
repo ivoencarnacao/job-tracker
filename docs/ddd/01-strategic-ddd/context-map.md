@@ -75,7 +75,7 @@ Same pattern as above. Skills data (JobSkill associations and trend queries) are
 
 The Skills context needs job description text and the application ID to extract and associate skills. Tracking publishes domain events (`JobDescriptionUpdated`, `JobApplicationCreated`) containing primitive data, and Skills consumes them independently with its own domain logic. Skills does not conform to or import Tracking's model — it receives only primitive fields (UUID, String) via events.
 
-**In practice (MVP monolith):** The Tracking context publishes `JobDescriptionUpdated` events via `DomainEventPublisher`. The Skills context subscribes with `@EventListener` in its `infrastructure/listener/` package, receiving the application ID and description text as primitives. The Skills context then runs its own extraction logic.
+**In practice (P1):** The Tracking context publishes `JobDescriptionUpdated` events via `DomainEventPublisher`. The Skills context subscribes with `@EventListener` in its `infrastructure/listener/` package, receiving the application ID and description text as primitives. The Skills context then runs its own extraction logic. Event infrastructure is introduced when the Skills context enters (VS-09/VS-10).
 
 ### Tracking (upstream) --> Dashboard (downstream): Open Host Service
 

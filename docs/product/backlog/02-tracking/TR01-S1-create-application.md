@@ -42,7 +42,9 @@ As an **authenticated User**, I want to **register a new job application and vie
 - If provided, URLs (e.g., job link) and emails (e.g., recruiter contact) are validated against correct format rules.
 - If any validation fails (e.g., missing title or invalid salary range), the UI rejects the submission and displays specific validation errors next to the affected fields.
 
-**Scenario 4: Domain Event Publication**
+**Scenario 4: Domain Event Publication** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - Upon successful creation of the application, if the user provided text in the job description field, the system publishes the `JobDescriptionUpdated` domain event.
 
@@ -79,7 +81,7 @@ As an **authenticated User**, I want to **register a new job application and vie
 - [ ] Create DTOs `CreateJobApplicationInput.java` and `JobApplicationOutput.java`
 - [ ] Create `tracking/application/CreateJobApplicationUseCase.java`
   - Receives input DTO, creates domain aggregate using factory method, saves
-  - Publishes `JobDescriptionUpdated` event if description is provided
+  - *(P1)* Publishes `JobDescriptionUpdated` event if description is provided
 - [ ] Create `tracking/application/ListJobApplicationsUseCase.java`
   - Fetches applications via `findAllByUserId` and returns output DTOs
 

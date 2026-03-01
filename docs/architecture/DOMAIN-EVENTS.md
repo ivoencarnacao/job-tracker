@@ -2,12 +2,16 @@
 
 > This document covers only **cross-context** events (events that cross bounded context boundaries). Each epic defines additional intra-context events documented in the respective slice files.
 
+## Phasing
+
+All cross-context events are **P1 (Post-MVP)** scope. In the MVP, the Dashboard context uses **Open Host Service** (direct read-only queries) — no event infrastructure is needed. Domain events will be introduced when the Skills context enters in P1 (VS-09/VS-10). See [architecture/FUTURE.md](FUTURE.md) for the full implementation plan.
+
 ## Events
 
 | Event                      | Publisher | Subscriber                             | Trigger                          |
 | -------------------------- | --------- | -------------------------------------- | -------------------------------- |
 | `JobDescriptionUpdated`    | Tracking  | Skills (extraction)                    | Job description saved or updated |
-| `ApplicationStatusChanged` | Tracking  | Dashboard (future: cache invalidation) | Pipeline status transition       |
+| `ApplicationStatusChanged` | Tracking  | Dashboard (P1: cache invalidation)     | Pipeline status transition       |
 
 ## Pattern
 
@@ -44,5 +48,5 @@ infrastructure/listener/
 - Events live in the **publishing** context's `domain/event/` package
 - Subscribers live in the **subscribing** context's `infrastructure/listener/` package
 - Only primitive data in events (UUIDs, Strings) — no domain objects cross boundaries
-- Synchronous in MVP (same thread, same transaction)
+- Synchronous when introduced in P1 (same thread, same transaction)
 - No context imports another context's domain model

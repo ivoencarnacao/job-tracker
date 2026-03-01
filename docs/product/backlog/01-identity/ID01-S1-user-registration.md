@@ -48,7 +48,9 @@ As an **unauthenticated visitor**, I want to **create a new account using my bas
 - The `User` aggregate's factory method rejects the creation, guaranteeing the object never exists in an invalid state in memory.
 - The UI displays the corresponding server-side validation errors via Thymeleaf.
 
-**Scenario 5: Domain Event Publication**
+**Scenario 5: Domain Event Publication** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - Upon successful persistence of the new user, the system publishes a `UserRegistered` domain event to notify other bounded contexts (as defined in the Epic rules).
 
@@ -89,7 +91,7 @@ As an **unauthenticated visitor**, I want to **create a new account using my bas
   - Validates email uniqueness via repository
   - Hashes password using injected encoder
   - Creates domain `User` aggregate and saves via repository
-  - Publishes `UserRegistered` event
+  - *(P1)* Publishes `UserRegistered` event
 
 ### Web / UI
 

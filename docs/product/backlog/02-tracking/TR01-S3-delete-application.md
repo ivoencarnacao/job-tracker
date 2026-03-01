@@ -43,7 +43,9 @@ As an **authenticated User**, I want to **delete a job application and its relat
 - All associated child entities (Interviews, FollowUps, Offers, JobSkills) are permanently deleted alongside the root aggregate (handled efficiently via database cascade mechanisms to maintain referential integrity).
 - The UI redirects the user to the application list with a success message.
 
-**Scenario 4: Domain Event Publication on Deletion**
+**Scenario 4: Domain Event Publication on Deletion** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - After the aggregate is successfully deleted from the database, the system publishes a `JobApplicationDeleted` domain event.
 - This ensures downstream contexts (e.g., Search, AI Parsing) can remove the associated data from their indexes or materialized views without tight coupling.
@@ -57,7 +59,7 @@ As an **authenticated User**, I want to **delete a job application and its relat
 - [ ] Create `tracking/application/DeleteJobApplicationUseCase.java`
   - Loads the application to verify ownership against the `AuthenticatedUser`.
   - Initiates the deletion through the repository.
-  - Publishes the `JobApplicationDeleted` domain event post-deletion.
+  - *(P1)* Publishes the `JobApplicationDeleted` domain event post-deletion.
 
 ### Web / UI
 

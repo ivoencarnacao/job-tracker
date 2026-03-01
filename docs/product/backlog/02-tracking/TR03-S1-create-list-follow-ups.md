@@ -44,7 +44,9 @@ As an **authenticated User**, I want to **add follow-up reminders to my job appl
 - When the user views the application detail page, the system retrieves and displays all associated follow-ups ordered by due date.
 - Follow-ups with a due date in the past and `completed = false` are visually highlighted as "overdue" in the UI.
 
-**Scenario 4: Domain Event Publication**
+**Scenario 4: Domain Event Publication** *(Deferred to P1)*
+
+> Event infrastructure will be introduced with the Skills context (VS-09/VS-10). See [architecture/FUTURE.md](../../../architecture/FUTURE.md).
 
 - Upon successfully persisting the aggregate with the new follow-up, the system publishes a `FollowUpScheduled` domain event.
 
@@ -70,13 +72,13 @@ As an **authenticated User**, I want to **add follow-up reminders to my job appl
   - Factory method, requires due date validation.
 - [ ] Update `tracking/domain/JobApplication.java` (Aggregate Root)
   - Add `addFollowUp(FollowUp followUp)` method to manage its internal collection and encapsulate the logic.
-- [ ] Create `tracking/domain/event/FollowUpScheduled.java` (Domain Event)
+- [ ] *(P1)* Create `tracking/domain/event/FollowUpScheduled.java` (Domain Event)
 
 ### Application
 
 - [ ] Create DTO `tracking/application/dto/AddFollowUpInput.java`
 - [ ] Create `tracking/application/AddFollowUpUseCase.java`
-  - Loads `JobApplication`, verifies ownership, calls `addFollowUp()`, saves the aggregate, and publishes the event.
+  - Loads `JobApplication`, verifies ownership, calls `addFollowUp()`, and saves the aggregate. *(P1: publishes the event.)*
 - [ ] Create `tracking/application/ListFollowUpsUseCase.java`
   - Loads the `JobApplication` by ID and returns its parsed follow-ups as a DTO list.
 

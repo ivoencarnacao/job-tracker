@@ -12,16 +12,16 @@ Domain events are deferred from MVP to P1. In the MVP, the Dashboard uses Open H
 
 ### Events to Implement
 
-| Event | Record Fields | Publisher | Subscriber |
-|-------|---------------|-----------|------------|
-| `JobApplicationCreated` | applicationId (UUID), userId (UUID), hasDescription (boolean) | Tracking | Skills |
-| `JobDescriptionUpdated` | applicationId (UUID), description (String) | Tracking | Skills |
-| `ApplicationStatusChanged` | applicationId (UUID), previousStatus (String), newStatus (String) | Tracking | Dashboard (optional) |
-| `UserRegistered` | userId (UUID), email (String) | Identity | (analytics) |
-| `FollowUpScheduled` | applicationId (UUID), dueDate (LocalDate) | Tracking | Dashboard (optional) |
-| `FollowUpCompleted` | applicationId (UUID), outcome (String) | Tracking | Dashboard (optional) |
-| `InterviewScheduled` | applicationId (UUID), scheduledAt (Instant), type (String) | Tracking | Dashboard (optional) |
-| `OfferReceived` | applicationId (UUID), offerDate (LocalDate) | Tracking | Dashboard (optional) |
+| Event                      | Record Fields                                                     | Publisher | Subscriber           |
+| -------------------------- | ----------------------------------------------------------------- | --------- | -------------------- |
+| `JobApplicationCreated`    | applicationId (UUID), userId (UUID), hasDescription (boolean)     | Tracking  | Skills               |
+| `JobDescriptionUpdated`    | applicationId (UUID), description (String)                        | Tracking  | Skills               |
+| `ApplicationStatusChanged` | applicationId (UUID), previousStatus (String), newStatus (String) | Tracking  | Dashboard (optional) |
+| `UserRegistered`           | userId (UUID), email (String)                                     | Identity  | (analytics)          |
+| `FollowUpScheduled`        | applicationId (UUID), dueDate (LocalDate)                         | Tracking  | Dashboard (optional) |
+| `FollowUpCompleted`        | applicationId (UUID), outcome (String)                            | Tracking  | Dashboard (optional) |
+| `InterviewScheduled`       | applicationId (UUID), scheduledAt (Instant), type (String)        | Tracking  | Dashboard (optional) |
+| `OfferReceived`            | applicationId (UUID), offerDate (LocalDate)                       | Tracking  | Dashboard (optional) |
 
 ### Implementation Checklist
 

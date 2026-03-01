@@ -99,7 +99,7 @@ Always use **Conventional Commits** with small, meaningful commits. Format: `typ
 
 Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, `ci`, `perf`
 
-Subject line only — no body or footer. Keep it concise and self-explanatory.
+Subject line only — **no body or footer**. Keep it concise and self-explanatory.
 
 **Commit by context:** Split commits by bounded context or concern. One commit per logical change — do not bundle unrelated changes together.
 

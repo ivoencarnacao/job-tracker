@@ -2,16 +2,16 @@
 
 All migrations target the `core` schema. See [DATA-SCHEMA-DETAIL.md](../schema/DATA-SCHEMA-DETAIL.md) for column-level specifications.
 
-| Version | File | Context | Vertical Slice | Description |
-|---------|------|---------|----------------|-------------|
-| V1 | `V1__create_schema.sql` | Shared | VS-00 | Create `core` schema |
-| V2 | `V2__create_users_table.sql` | Identity | VS-01 | Users table with email uniqueness |
-| V3 | `V3__create_job_applications_table.sql` | Tracking | VS-02 | Job applications with all fields, check constraints, indexes |
-| V4 | `V4__create_follow_ups_table.sql` | Tracking | VS-04 | Follow-ups table with due date and outcome |
-| V5 | `V5__create_interviews_table.sql` | Tracking | VS-05 | Interviews table with type, format, outcome |
-| V6 | `V6__create_offers_table.sql` | Tracking | VS-05 | Offers table with UNIQUE constraint on application |
-| V7 | `V7__create_skills_tables.sql` | Skills | VS-09 | Skills + skill_aliases tables |
-| V8 | `V8__create_job_application_skills_table.sql` | Skills | VS-09 | Join table (composite PK) |
+| Version | File                                          | Context  | Vertical Slice | Description                                                  |
+| ------- | --------------------------------------------- | -------- | -------------- | ------------------------------------------------------------ |
+| V1      | `V1__create_schema.sql`                       | Shared   | VS-00          | Create `core` schema                                         |
+| V2      | `V2__create_users_table.sql`                  | Identity | VS-01          | Users table with email uniqueness                            |
+| V3      | `V3__create_job_applications_table.sql`       | Tracking | VS-02          | Job applications with all fields, check constraints, indexes |
+| V4      | `V4__create_follow_ups_table.sql`             | Tracking | VS-04          | Follow-ups table with due date and outcome                   |
+| V5      | `V5__create_interviews_table.sql`             | Tracking | VS-05          | Interviews table with type, format, outcome                  |
+| V6      | `V6__create_offers_table.sql`                 | Tracking | VS-05          | Offers table with UNIQUE constraint on application           |
+| V7      | `V7__create_skills_tables.sql`                | Skills   | VS-09          | Skills + skill_aliases tables                                |
+| V8      | `V8__create_job_application_skills_table.sql` | Skills   | VS-09          | Join table (composite PK)                                    |
 
 ## Conventions
 
@@ -25,14 +25,14 @@ All migrations target the `core` schema. See [DATA-SCHEMA-DETAIL.md](../schema/D
 
 Created before any table that uses them:
 
-| Type | Values | Used By |
-|------|--------|---------|
-| `application_status` | SAVED, APPLIED, UNDER_REVIEW, HR_INTERVIEW, TECHNICAL_INTERVIEW, CHALLENGE, FINAL_INTERVIEW, OFFER, REJECTED, GHOSTED, WITHDRAWN | job_applications.status |
-| `work_mode` | REMOTE, HYBRID, ON_SITE | job_applications.work_mode |
-| `contract_type` | FULL_TIME, PART_TIME, CONTRACT, INTERNSHIP | job_applications.contract_type, offers.contract_type |
-| `interview_type` | HR, TECHNICAL, FINAL | interviews.type |
-| `interview_format` | ONLINE, ON_SITE | interviews.format |
-| `interview_outcome` | PENDING, PASSED, FAILED | interviews.outcome |
-| `follow_up_outcome` | RESPONDED, NO_RESPONSE | follow_ups.outcome |
-| `offer_status` | RECEIVED, ACCEPTED, DECLINED, EXPIRED | offers.status |
-| `skill_category` | LANGUAGE, FRAMEWORK, DATABASE, CLOUD, DEVOPS, TESTING, ARCHITECTURE, TOOL, METHODOLOGY, SOFT_SKILL | skills.category |
+| Type                 | Values                                                                                                                           | Used By                                              |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `application_status` | SAVED, APPLIED, UNDER_REVIEW, HR_INTERVIEW, TECHNICAL_INTERVIEW, CHALLENGE, FINAL_INTERVIEW, OFFER, REJECTED, GHOSTED, WITHDRAWN | job_applications.status                              |
+| `work_mode`          | REMOTE, HYBRID, ON_SITE                                                                                                          | job_applications.work_mode                           |
+| `contract_type`      | FULL_TIME, PART_TIME, CONTRACT, INTERNSHIP                                                                                       | job_applications.contract_type, offers.contract_type |
+| `interview_type`     | HR, TECHNICAL, FINAL                                                                                                             | interviews.type                                      |
+| `interview_format`   | ONLINE, ON_SITE                                                                                                                  | interviews.format                                    |
+| `interview_outcome`  | PENDING, PASSED, FAILED                                                                                                          | interviews.outcome                                   |
+| `follow_up_outcome`  | RESPONDED, NO_RESPONSE                                                                                                           | follow_ups.outcome                                   |
+| `offer_status`       | RECEIVED, ACCEPTED, DECLINED, EXPIRED                                                                                            | offers.status                                        |
+| `skill_category`     | LANGUAGE, FRAMEWORK, DATABASE, CLOUD, DEVOPS, TESTING, ARCHITECTURE, TOOL, METHODOLOGY, SOFT_SKILL                               | skills.category                                      |

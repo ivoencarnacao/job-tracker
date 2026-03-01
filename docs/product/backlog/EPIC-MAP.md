@@ -8,15 +8,15 @@
 
 ## Tracking Context (Core)
 
-| ID   | Epic                                                                 | Priority | Slices | Vertical Slice    |
-| ---- | -------------------------------------------------------------------- | -------- | ------ | ----------------- |
-| TR01 | [Application CRUD](02-tracking/EPIC-TR01-application-crud.md)        | P0       | 3      | VS-02, VS-03      |
-| TR02 | [Pipeline Management](02-tracking/EPIC-TR02-pipeline-management.md)  | P0       | 1      | VS-03             |
-| TR03 | [Follow-Up Reminders](02-tracking/EPIC-TR03-follow-ups.md)           | P0       | 2      | VS-04             |
-| TR04 | [Interview Management](02-tracking/EPIC-TR04-interviews.md)          | P0       | 1      | VS-05             |
-| TR05 | [Offer Recording](02-tracking/EPIC-TR05-offers.md)                   | P0       | 1      | VS-05             |
-| TR06 | [Search, Filter & Sort](02-tracking/EPIC-TR06-search-and-filter.md)  | P0       | 3      | VS-06, VS-11      |
-| TR07 | [Auto-Ghosting Suggestion](02-tracking/EPIC-TR07-ghosting-policy.md) | P1       | 2      | VS-08             |
+| ID   | Epic                                                                 | Priority | Slices | Vertical Slice |
+| ---- | -------------------------------------------------------------------- | -------- | ------ | -------------- |
+| TR01 | [Application CRUD](02-tracking/EPIC-TR01-application-crud.md)        | P0       | 3      | VS-02, VS-03   |
+| TR02 | [Pipeline Management](02-tracking/EPIC-TR02-pipeline-management.md)  | P0       | 1      | VS-03          |
+| TR03 | [Follow-Up Reminders](02-tracking/EPIC-TR03-follow-ups.md)           | P0       | 2      | VS-04          |
+| TR04 | [Interview Management](02-tracking/EPIC-TR04-interviews.md)          | P0       | 1      | VS-05          |
+| TR05 | [Offer Recording](02-tracking/EPIC-TR05-offers.md)                   | P0       | 1      | VS-05          |
+| TR06 | [Search, Filter & Sort](02-tracking/EPIC-TR06-search-and-filter.md)  | P0       | 3      | VS-06, VS-11   |
+| TR07 | [Auto-Ghosting Suggestion](02-tracking/EPIC-TR07-ghosting-policy.md) | P1       | 2      | VS-08          |
 
 ## Skills Context (Core)
 

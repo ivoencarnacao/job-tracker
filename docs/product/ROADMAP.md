@@ -36,45 +36,45 @@ W13 VS-11  Insights + Advanced Filters  │
 
 Each vertical slice is independently deployable and delivers user-facing value. Backlog slices are grouped when shipping them separately would not provide a useful increment.
 
-| Week | Vertical Slice | Backlog Slices | Deliverable |
-| ---- | -------------- | -------------- | ----------- |
-| W1 | VS-00: Infrastructure & CI/CD | — | Landing page live, CI green, staging + production deploy |
-| W2 | VS-01: User Authentication | ID01-S1 + ID01-S2 | Register + login functional in production |
-| W3 | VS-02: Application CRUD | TR01-S1 + TR01-S2 | Create, list, view, edit applications |
-| W4 | VS-03: Pipeline + Delete | TR02-S1 + TR01-S3 | 11-state pipeline management + delete |
-| W5 | VS-04: Follow-up Reminders | TR03-S1 + TR03-S2 | Create and complete follow-ups |
-| W6 | VS-05: Interviews + Offers | TR04-S1 + TR05-S1 | Interview and offer tracking |
-| W7 | VS-06: Search & Filter | TR06-S1 + TR06-S2 | Free-text search + status filter |
-| W8 | VS-07: Dashboard | DA01-S1 + DA01-S2 + DA01-S3 | Core metrics, response rate, alerts |
-| W9 | Beta Launch + Stabilization | — | Analytics, feedback widget, bug fixes |
-| W10 | VS-08: Ghosting Detection | TR07-S1 + TR07-S2 | Ghosting suggestions on dashboard |
-| W11 | VS-09: Skill Catalog + Tagging | SK01-S1 + SK01-S2 | Manual skill tagging from curated catalog |
-| W12 | VS-10: Skill Extraction | SK02-S1 + SK02-S2 | Auto-extraction from job descriptions |
-| W13 | VS-11: Insights + Advanced Filters | SK03-S1 + DA02-S1 + TR06-S3 | Skill insights page + advanced filters |
+| Week | Vertical Slice                     | Backlog Slices              | Deliverable                                              |
+| ---- | ---------------------------------- | --------------------------- | -------------------------------------------------------- |
+| W1   | VS-00: Infrastructure & CI/CD      | —                           | Landing page live, CI green, staging + production deploy |
+| W2   | VS-01: User Authentication         | ID01-S1 + ID01-S2           | Register + login functional in production                |
+| W3   | VS-02: Application CRUD            | TR01-S1 + TR01-S2           | Create, list, view, edit applications                    |
+| W4   | VS-03: Pipeline + Delete           | TR02-S1 + TR01-S3           | 11-state pipeline management + delete                    |
+| W5   | VS-04: Follow-up Reminders         | TR03-S1 + TR03-S2           | Create and complete follow-ups                           |
+| W6   | VS-05: Interviews + Offers         | TR04-S1 + TR05-S1           | Interview and offer tracking                             |
+| W7   | VS-06: Search & Filter             | TR06-S1 + TR06-S2           | Free-text search + status filter                         |
+| W8   | VS-07: Dashboard                   | DA01-S1 + DA01-S2 + DA01-S3 | Core metrics, response rate, alerts                      |
+| W9   | Beta Launch + Stabilization        | —                           | Analytics, feedback widget, bug fixes                    |
+| W10  | VS-08: Ghosting Detection          | TR07-S1 + TR07-S2           | Ghosting suggestions on dashboard                        |
+| W11  | VS-09: Skill Catalog + Tagging     | SK01-S1 + SK01-S2           | Manual skill tagging from curated catalog                |
+| W12  | VS-10: Skill Extraction            | SK02-S1 + SK02-S2           | Auto-extraction from job descriptions                    |
+| W13  | VS-11: Insights + Advanced Filters | SK03-S1 + DA02-S1 + TR06-S3 | Skill insights page + advanced filters                   |
 
 ### Merge Rationale
 
-| Merge | Reason |
-| ----- | ------ |
-| ID01-S1 + ID01-S2 → VS-01 | Registration without login has no user value |
-| TR01-S1 + TR01-S2 → VS-02 | Creating an application without viewing it is not useful |
-| TR03-S1 + TR03-S2 → VS-04 | Follow-up creation and completion are a single user story |
-| DA01-S1 + DA01-S2 + DA01-S3 → VS-07 | All three are read-only queries on the same dashboard page |
-| TR07-S1 + TR07-S2 → VS-08 | Ghosting detection without the UI delivers zero value |
-| TR06-S1 + TR06-S2 → VS-06 | Search and status filter form a single "find applications" feature |
+| Merge                               | Reason                                                             |
+| ----------------------------------- | ------------------------------------------------------------------ |
+| ID01-S1 + ID01-S2 → VS-01           | Registration without login has no user value                       |
+| TR01-S1 + TR01-S2 → VS-02           | Creating an application without viewing it is not useful           |
+| TR03-S1 + TR03-S2 → VS-04           | Follow-up creation and completion are a single user story          |
+| DA01-S1 + DA01-S2 + DA01-S3 → VS-07 | All three are read-only queries on the same dashboard page         |
+| TR07-S1 + TR07-S2 → VS-08           | Ghosting detection without the UI delivers zero value              |
+| TR06-S1 + TR06-S2 → VS-06           | Search and status filter form a single "find applications" feature |
 
 ---
 
 ## Deployment Milestones
 
-| Date | Milestone | Gate Criteria |
-| ---- | --------- | ------------- |
-| Apr 4 (W1) | Infrastructure Live | CI green, staging + production deploy working, landing page accessible |
-| Apr 11 (W2) | First Functional Deploy | Registration + login working in production |
-| Apr 18 (W3) | Core Tracking | Users can create and manage applications in production |
-| May 23 (W8) | **Private Beta Gate** | All P0 slices complete, [release criteria](#release-criteria) met |
-| Jun 6 (W10) | P1 Phase 1 | Ghosting detection live, beta stabilized |
-| Jun 27 (W13) | **Open Beta Ready** | All P1 slices complete, insights page live |
+| Date         | Milestone               | Gate Criteria                                                          |
+| ------------ | ----------------------- | ---------------------------------------------------------------------- |
+| Apr 4 (W1)   | Infrastructure Live     | CI green, staging + production deploy working, landing page accessible |
+| Apr 11 (W2)  | First Functional Deploy | Registration + login working in production                             |
+| Apr 18 (W3)  | Core Tracking           | Users can create and manage applications in production                 |
+| May 23 (W8)  | **Private Beta Gate**   | All P0 slices complete, [release criteria](#release-criteria) met      |
+| Jun 6 (W10)  | P1 Phase 1              | Ghosting detection live, beta stabilized                               |
+| Jun 27 (W13) | **Open Beta Ready**     | All P1 slices complete, insights page live                             |
 
 ---
 
@@ -116,25 +116,25 @@ SK01-S1 (Seed Catalog)                                      ┐
 
 ### Phase 1 — Private Beta
 
-|                    |                                                                              |
-| ------------------ | ---------------------------------------------------------------------------- |
-| **Duration**       | 2-3 weeks (starting W9)                                                     |
-| **Audience**       | 10-20 trusted testers (university peers, developer contacts, career changers)|
-| **Goal**           | Validate core flows, identify friction, collect qualitative feedback         |
+|                    |                                                                                          |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| **Duration**       | 2-3 weeks (starting W9)                                                                  |
+| **Audience**       | 10-20 trusted testers (university peers, developer contacts, career changers)            |
+| **Goal**           | Validate core flows, identify friction, collect qualitative feedback                     |
 | **Entry gate**     | All P0 slices complete (VS-01 through VS-07). See [Release Criteria](#release-criteria). |
-| **Feedback**       | Direct messaging + in-app feedback form                                      |
-| **Success signal** | Core flows work end-to-end without critical bugs                             |
+| **Feedback**       | Direct messaging + in-app feedback form                                                  |
+| **Success signal** | Core flows work end-to-end without critical bugs                                         |
 
 ### Phase 2 — Open Beta
 
-|                    |                                                                |
-| ------------------ | -------------------------------------------------------------- |
-| **Duration**       | 4-6 weeks                                                      |
-| **Audience**       | Open registration with landing page                            |
-| **Goal**           | Validate product-market fit with organic traffic               |
+|                    |                                                                        |
+| ------------------ | ---------------------------------------------------------------------- |
+| **Duration**       | 4-6 weeks                                                              |
+| **Audience**       | Open registration with landing page                                    |
+| **Goal**           | Validate product-market fit with organic traffic                       |
 | **Entry gate**     | Phase 1 feedback addressed, P1 features shipping (VS-08 through VS-11) |
-| **Metrics**        | Activation rate > 30%, week-1 retention > 40%                  |
-| **Success signal** | Sustained organic user growth                                  |
+| **Metrics**        | Activation rate > 30%, week-1 retention > 40%                          |
+| **Success signal** | Sustained organic user growth                                          |
 
 ### Phase 3 — Public Launch
 
@@ -200,10 +200,10 @@ SK01-S1 (Seed Catalog)                                      ┐
 
 | #   | Hypothesis                                        | Validated in             |
 | --- | ------------------------------------------------- | ------------------------ |
-| H1  | Users manually input if form < 1 minute           | Phase 1 (VS-02, Week 3) |
+| H1  | Users manually input if form < 1 minute           | Phase 1 (VS-02, Week 3)  |
 | H2  | Job descriptions yield 3+ recognized skills       | Phase 2 (VS-10, Week 12) |
 | H3  | Tracking + insights > tracking alone (higher WAU) | Phase 2 (VS-11, Week 13) |
-| H4  | Follow-ups reduce ghosting rate                   | Phase 1 (VS-04, Week 5) |
+| H4  | Follow-ups reduce ghosting rate                   | Phase 1 (VS-04, Week 5)  |
 
 ---
 

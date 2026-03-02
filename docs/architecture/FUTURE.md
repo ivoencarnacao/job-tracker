@@ -44,7 +44,14 @@ Domain events are deferred from MVP to P1. In the MVP, the Dashboard uses Open H
 - **Async domain events:** Add `@Async` + `@EnableAsync` for non-blocking event processing
 - **Post-commit events:** Use `@TransactionalEventListener(phase = AFTER_COMMIT)` to ensure events fire only after successful transaction commit
 
+## Database Schema per Bounded Context
+
+For the MVP, a single `core` schema is used. DDD isolation is enforced at the Java layer (packages per bounded context, repository interfaces in domain, no cross-context imports). Adding separate schemas in the database would replicate this boundary but with complexity cost that provides no real benefit in a monolith with few tables.
+
+**Future evolution:** If the project moves toward microservices or multi-tenancy, migrate to separate schemas per bounded context (`identity`, `tracking`, `skills`). This is a relatively simple refactoring (table renames + `@Table(schema = ...)` updates on JPA entities). The Dashboard context would use cross-schema read-only queries.
+
 ## Infrastructure
 
+- **`Persistable<UUID>` on JPA entities:** When UUIDs are application-generated (pre-set before persist), Spring Data JPA calls `merge()` instead of `persist()`, issuing a spurious `SELECT` before every `INSERT`. Implementing `Persistable<UUID>` with a `@Transient boolean isNew` flag (flipped by `@PostLoad`/`@PostPersist`) eliminates this overhead.
 - **Optimistic locking:** Add version column for concurrent edit detection (multiple tabs scenario)
 - **Full-text search:** PostgreSQL `tsvector`/`tsquery` for richer search capabilities

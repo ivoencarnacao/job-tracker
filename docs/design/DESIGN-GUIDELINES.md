@@ -43,12 +43,14 @@ Used sparingly for application pipeline status and system feedback only.
 
 ### Font Family
 
-**Geist** by Vercel — a modern, geometric sans-serif optimized for interfaces.
+**Geist** by Vercel — a modern, geometric sans-serif optimized for interfaces. Both variants are loaded as variable fonts via Google Fonts (full weight range `wght@100..900`).
 
-| Variant | Usage |
-|---------|-------|
-| Geist Sans | UI text: headings, body, labels, buttons |
-| Geist Mono | Data: numbers, dates, code, status values |
+| Variant | Usage | Tailwind Class |
+|---------|-------|----------------|
+| Geist Sans | UI text: headings, body, labels, buttons | `font-geist` |
+| Geist Mono | Data: numbers, dates, code, status values | `font-geist-mono` |
+
+> **Loading:** Both families must be included in the Google Fonts `<link>` tag: `family=Geist:wght@100..900&family=Geist+Mono:wght@100..900`.
 
 ### Type Scale
 
@@ -133,6 +135,39 @@ Solid offset shadows with **no blur**. This is the signature Neo-Brutalism shado
 
 ---
 
+## Transitions & Interactions
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `transition-default` | 150ms ease-in-out | All interactive element transitions |
+| `translate-press` | translate(2px, 2px) | Active/pressed state offset |
+
+### Hover Pattern
+
+- Shadow grows one level (sm → md, md → lg)
+- Transition: `transition-all duration-150 ease-in-out`
+
+### Active/Press Pattern
+
+- Shadow shrinks to `shadow-brutal-sm`
+- Element translates 2px down-right: `translate-x-0.5 translate-y-0.5`
+- Combined creates a "button press" illusion
+
+### Tailwind Classes
+
+```
+/* Interactive element base */
+transition-all duration-150 ease-in-out
+
+/* Hover (example: card with shadow-brutal-md) */
+hover:shadow-brutal-lg
+
+/* Active (example: button) */
+active:shadow-brutal-sm active:translate-x-0.5 active:translate-y-0.5
+```
+
+---
+
 ## Component Guidance
 
 ### Buttons
@@ -160,7 +195,7 @@ Solid offset shadows with **no blur**. This is the signature Neo-Brutalism shado
 ### Status Badges
 
 - Small inline elements for pipeline states.
-- Background: corresponding accent color (low opacity, e.g., 10-15%).
+- Background: corresponding accent color at 10% opacity via Tailwind modifier (e.g., `bg-blue-600/10`, `bg-green-600/10`).
 - Text: corresponding accent color (full opacity).
 - Border: 1px solid corresponding accent color.
 - Border-radius: `radius-sm` (2px).
@@ -177,6 +212,16 @@ Solid offset shadows with **no blur**. This is the signature Neo-Brutalism shado
 - Top bar: white background, `border-default` bottom border.
 - Active link: bold weight, underline.
 - Hover: underline.
+
+### Focus States (Accessibility)
+
+All interactive elements must have visible focus indicators:
+
+- **Buttons:** `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`
+- **Links:** `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`
+- **Cards (interactive):** `focus-visible:shadow-brutal-lg focus-visible:outline-none`
+
+> Use `focus-visible` (not `focus`) to avoid showing focus rings on mouse clicks.
 
 ---
 
@@ -207,13 +252,13 @@ Reference for translating design tokens into Tailwind classes:
 ```
 /* Borders */
 border-2 border-black          /* border-default */
-border-3 border-black          /* border-thick (custom) */
+border-3 border-black          /* border-thick (custom @utility) */
 border border-gray-200         /* border-thin */
 
-/* Shadows (custom utilities) */
-shadow-[2px_2px_0_#000]        /* shadow-sm */
-shadow-[4px_4px_0_#000]        /* shadow-md */
-shadow-[6px_6px_0_#000]        /* shadow-lg */
+/* Shadows (custom @theme tokens) */
+shadow-brutal-sm                /* 2px 2px 0 #000 */
+shadow-brutal-md                /* 4px 4px 0 #000 */
+shadow-brutal-lg                /* 6px 6px 0 #000 */
 
 /* Radius */
 rounded-none                    /* radius-none (default) */
@@ -226,6 +271,9 @@ font-geist-mono                 /* Geist Mono */
 
 /* Spacing follows Tailwind's default 4px scale */
 p-1 (4px), p-2 (8px), p-3 (12px), p-4 (16px), p-6 (24px), p-8 (32px)
+
+/* Transitions */
+transition-all duration-150 ease-in-out
 ```
 
-> These mappings assume a Tailwind CSS 4 configuration with custom theme extensions for Geist fonts, the 3px border width, and solid shadow utilities.
+> These mappings require a Tailwind CSS 4 `@theme` block defining `--font-geist`, `--font-geist-mono`, and `--shadow-brutal-*` tokens, plus a custom `@utility border-3` for the 3px border width. See `application.css` for the full configuration.

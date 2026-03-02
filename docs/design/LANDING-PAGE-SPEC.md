@@ -18,6 +18,21 @@ Convert visitors into registered users. Communicate the value proposition in und
 
 ## Sections
 
+### 0. Header
+
+**Objective:** Brand presence and persistent CTA access.
+
+| Element | Notes |
+|---------|-------|
+| Logo | Text-based: "Job Tracker" in bold Geist Sans, black |
+| Primary CTA | "Get Started" button (compact primary style) |
+
+**Layout:** Sticky top bar. Logo left-aligned, CTA right-aligned. White background, `border-default` bottom border. Max content width: 1200px centered. Height: 64px.
+
+**Mobile:** Same layout, condensed padding.
+
+---
+
 ### 1. Hero
 
 **Objective:** Immediate value communication.
@@ -28,9 +43,8 @@ Convert visitors into registered users. Communicate the value proposition in und
 | Subheadline | Solution statement — what the product does (1-2 lines) |
 | Primary CTA | Sign-up action (thick border button, shadow-lg) |
 | Secondary CTA | "Learn more" — scrolls to Features section (ghost button) |
-| Visual | App screenshot or mockup framed with Neo-Brutalism border |
 
-**Layout:** Centered content, generous vertical spacing. Visual element to the right on desktop, below text on mobile.
+**Layout:** Centered content, generous vertical spacing. Text and CTAs centered on both desktop and mobile.
 
 ---
 
@@ -62,7 +76,7 @@ Convert visitors into registered users. Communicate the value proposition in und
 | Interview and offer management | Log interviews, record offers, track outcomes |
 | Skill trend insights | See which skills appear most in your saved postings |
 
-**Layout:** Alternating image-text rows (image left / text right, then reversed). Each feature block has a screenshot/mockup illustrating the UI. On mobile, image stacks above text.
+**Layout:** Vertical feature cards in a 2x2 grid on desktop (single column on mobile). Each card is a Neo-Brutalism card with icon, title, and description. Images/screenshots to be added post-launch.
 
 ---
 
@@ -89,7 +103,7 @@ Convert visitors into registered users. Communicate the value proposition in und
 | Testimonial cards | Placeholder — empty for launch, to be filled with real user quotes post-launch |
 | Usage stats | Placeholder — "X applications tracked" counter (once there's real data) |
 
-**Layout:** Centered section with 2-3 quote cards. Can be hidden entirely at launch if no content is available.
+**Layout:** Centered section with empty state text at launch. Replace with real testimonials and usage data when available.
 
 ---
 
@@ -146,4 +160,18 @@ Convert visitors into registered users. Communicate the value proposition in und
 | First Contentful Paint | < 1.5s |
 | Largest Contentful Paint | < 2.5s |
 | Total page weight | < 500KB (including images) |
-| JavaScript | Minimal — no framework, only scroll behavior if needed |
+| JavaScript | Minimal — no additional JS framework beyond Vite's build tooling. Only vanilla JS for scroll-to-section behavior on "Learn More" CTA |
+
+---
+
+## SEO & Meta Tags
+
+| Tag | Value |
+|-----|-------|
+| `<title>` | Job Tracker — Track Applications, Land Jobs |
+| `meta description` | Track every job application, never miss a follow-up, and discover which skills the market wants. Free forever. |
+| `og:title` | Job Tracker — Track Applications, Land Jobs |
+| `og:description` | Same as meta description |
+| `og:type` | website |
+| `og:image` | To be added (1200x630 sharing image) |
+| `twitter:card` | summary_large_image |

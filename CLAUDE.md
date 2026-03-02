@@ -83,6 +83,14 @@ The codebase follows Clean Architecture with DDD Bounded Contexts. Each bounded 
 - Testcontainers with `init-schemas.sql` bootstraps the `core` schema
 - JaCoCo enforces minimum 70% line coverage on `verify`
 
+## Best Practices
+
+Follow modern **Spring Framework 6 / Spring Boot 3.x / Hibernate 6** best practices and conventions. When presenting technical options, always include the recommended approach per current Spring Boot 3.x and Hibernate 6 conventions.
+
+## Workflow Rules
+
+**No code without explicit request.** Never write, create, or modify source code, migrations, configuration files, or any implementation artifacts unless the user explicitly asks for it. Planning and research tasks produce only documentation (markdown plans, checklists). Wait for an explicit instruction to start coding.
+
 ## Code Style
 
 - **Java**: Spring Java Format (4-space indent). Validated at build time; fix with `./mvnw spring-javaformat:apply`

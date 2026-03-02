@@ -1,14 +1,14 @@
 databases:
   - name: jobtracker-db
     databaseName: jobtracker_db
-    user: postgres
+    user: jobtracker_user
     plan: free
     region: frankfurt
 
 services:
   - type: web
     name: jobtracker-app
-    runtime: docker # Alterado de 'env' para 'runtime' para maior compatibilidade
+    runtime: docker
     plan: free
     region: frankfurt
     branch: main

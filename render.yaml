@@ -1,0 +1,40 @@
+databases:
+  - name: jobtracker-db
+    databaseName: jobtracker_db
+    user: postgres
+    plan: free
+    region: frankfurt
+
+services:
+  - type: web
+    name: jobtracker-app
+    runtime: docker # Alterado de 'env' para 'runtime' para maior compatibilidade
+    plan: free
+    region: frankfurt
+    branch: main
+    autoDeploy: false
+    envVars:
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: jobtracker-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: jobtracker-db
+          property: password
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: jobtracker-db
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: jobtracker-db
+          property: port
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: jobtracker-db
+          property: database
+      - key: SPRING_FLYWAY_ENABLED
+        value: "true"
+      - key: PORT
+        value: "8080"

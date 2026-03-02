@@ -1,16 +1,16 @@
-# Plano de Implementacao — VS-00 + VS-01
+# Plano de Implementacao — VS-00 + VS-01 + VS-02
 
 ## Contexto
 
-Este plano cobre as duas primeiras Vertical Slices do MVP:
+Este plano cobre as tres primeiras Vertical Slices do MVP:
 
-- **VS-00 (W1): Infrastructure & CI/CD** — Preparar a infraestrutura base: migration V1, configuracao de seguranca inicial, landing page, e CI pipeline.
-- **VS-01 (W2): User Authentication** — Registo de utilizadores (ID01-S1) e login com gestao de sessao (ID01-S2). Primeiro deploy funcional.
+- **VS-00 (W1): Infrastructure & CI/CD** — Infraestrutura base: CI pipeline, Docker, Render deploy, Testcontainers, frontend tooling, code quality. **CONCLUIDO.**
+- **VS-01 (W1): Landing Page** — Landing page com design Neo-Brutalism segundo a `LANDING-PAGE-SPEC.md`. Partilha W1 com VS-00 (ja concluido).
+- **VS-02 (W2): User Authentication** — Shared infrastructure (Flyway V1, SecurityConfig, JpaAuditingConfig, UuidV7, UTC), registo de utilizadores (ID01-S1) e login com gestao de sessao (ID01-S2). Primeiro deploy funcional.
 
-O codebase actual e um scaffold vazio: apenas `Application.java`, templates placeholder (`index.html`, `layout/main.html`), configuracao de propriedades, Docker Compose, e Testcontainers. Nao existem migrations, entidades, controllers, nem configuracao de seguranca.
-
-**Gate Criteria VS-00:** CI green, staging + production deploy working, landing page acessivel.
-**Gate Criteria VS-01:** Register + login funcional em producao.
+**Gate Criteria VS-00:** CI green, staging + production deploy working. **MET ✓**
+**Gate Criteria VS-01:** Landing page acessivel em `/` com todas as seccoes, responsiva.
+**Gate Criteria VS-02:** Register + login funcional em producao.
 
 ---
 
@@ -30,7 +30,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
 - Spring Data JPA auditing: `@CreatedDate` / `@LastModifiedDate` com `Instant` (suportado nativamente)
 - `@EnableJpaAuditing` numa `@Configuration` separada (nao no `@SpringBootApplication`) para compatibilidade com `@WebMvcTest`
 - Conversao para timezone do utilizador feita na camada `web/` (view models), nao no domain
-- Para VS-01 nao ha necessidade de conversao de timezone (so `createdAt`/`updatedAt` de audit)
+- Para VS-02 nao ha necessidade de conversao de timezone (so `createdAt`/`updatedAt` de audit)
 
 ### Regra a Adicionar ao CLAUDE.md (pos-aprovacao)
 
@@ -38,7 +38,94 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
 
 ---
 
-## VS-00: Infrastructure & CI/CD
+## VS-00: Infrastructure & CI/CD ✓ CONCLUIDO
+
+### Implementado
+
+- [x] CI/CD pipeline — GitHub Actions (`build.yml` + `deploy.yml`)
+- [x] Render deployment (`render.yaml` com PostgreSQL + web service)
+- [x] Docker multi-stage build (`Dockerfile` — builder Maven + runtime JRE slim)
+- [x] Docker Compose — PostgreSQL 17 + pgAdmin 4 (`compose.yaml`)
+- [x] Testcontainers (`TestcontainersConfiguration.java` com `@ServiceConnection`)
+- [x] Frontend tooling (Vite + Tailwind CSS 4 + frontend-maven-plugin)
+- [x] Code quality (JaCoCo 70%, Spring Java Format, Prettier, EditorConfig)
+- [x] Dependencies completas (`pom.xml` — Spring Boot 3.5.11, Java 21, Hibernate 6, MapStruct 1.6.3)
+
+### Revisao de Qualidade
+
+**CI (`build.yml`):** Bem estruturado — concurrency com `cancel-in-progress: true`, `paths-ignore` para `.md`, branch triggers completos (`main`, `develop`, `feature/**`, `release/**`, `hotfix/**`). Usa `actions/checkout@v5` e `actions/setup-java@v5` com cache Maven. Single `./mvnw -B verify` corre formatting check, compilacao, unit tests, integration tests (Testcontainers), e JaCoCo.
+
+**CD (`deploy.yml`):** Funcional — `workflow_run` chained ao CI, conditional deploy (`conclusion == 'success'`), deploy hook via secret, so na branch `main`. Melhoria futura: health check pos-deploy (requer `spring-boot-starter-actuator`, mencionado no SPRINTS.md mas nao presente no `pom.xml`).
+
+**Docker (`Dockerfile`):** Multi-stage correcto — `dependency:go-offline` no builder para cache de layers, runtime com `eclipse-temurin:21-jre` (slim).
+
+**Testcontainers:** Usa `@ServiceConnection` (padrao moderno Spring Boot 3.1+) com `@TestConfiguration(proxyBeanMethods = false)`. Monta `init-schemas.sql` para bootstrap do schema.
+
+**Surefire:** Pattern `**/*Test.java` funciona (match `*Tests.java` por substring) mas convem alinhar com a convencao `*Tests.java` do CLAUDE.md para clareza.
+
+### Melhorias Futuras (Baixa Prioridade)
+
+- [ ] Health check pos-deploy no `deploy.yml` — adicionar `spring-boot-starter-actuator` ao `pom.xml` e step de verificacao `/actuator/health` apos trigger do deploy hook
+- [ ] Alinhar Surefire include pattern com convencao `*Tests.java` do CLAUDE.md — alterar `**/*Test.java` para `**/*Tests.java` no `pom.xml`
+- [ ] Adicionar job `docker-build` no CI (`build.yml`) para validar Dockerfile antes do deploy — catch de erros de build antes do Render
+- [ ] Internacionalizacao (i18n) — migrar copy da landing page para `src/main/resources/i18n/messages.properties` (EN) + `messages_pt-PT.properties` (PT-PT) com `MessageSource` e `#{...}` no Thymeleaf. Requer `LocaleResolver` e locale switcher. Referencia: [`LANDING-PAGE-COPY.md`](../design/LANDING-PAGE-COPY.md)
+
+---
+
+## VS-01: Landing Page
+
+**Branch:** `feature/vs01-landing-page`
+
+Scope: Redesign do `index.html` segundo a [`LANDING-PAGE-SPEC.md`](../design/LANDING-PAGE-SPEC.md). Trabalho puramente frontend/template — sem domain logic, migrations, ou seguranca. Copy EN hardcoded no template; [`LANDING-PAGE-COPY.md`](../design/LANDING-PAGE-COPY.md) como referencia (EN + PT-PT). Migracao para i18n (`MessageSource`) deferida para futuro.
+
+**Milestone dedicada:** Nao. A spec ja existe (`LANDING-PAGE-SPEC.md` + `DESIGN-GUIDELINES.md` + `LANDING-PAGE-COPY.md`), nao ha bounded context nem domain logic — a seccao neste plano com checklist e suficiente.
+
+### 1. Controller
+
+- [ ] Criar controller `GET /` — view controller em `shared/config/WebConfig.java` (ou `HomeController`)
+  - Renderiza `index.html` (landing page)
+
+### 2. Landing Page
+
+- [ ] Redesenhar `src/main/resources/templates/index.html` segundo a `LANDING-PAGE-SPEC.md`:
+  - Decorar com `layout/main`
+  - **Seccao 1 — Hero:** Headline (problema), subheadline (solucao), CTA primario ("Get Started" → `/register`), CTA secundario ("Learn More" → scroll), visual/mockup
+  - **Seccao 2 — Problem Statement:** 3 pain points em cards Neo-Brutalism (grid 3 colunas desktop, 1 coluna mobile)
+  - **Seccao 3 — Features:** 4 features em rows alternadas imagem-texto
+  - **Seccao 4 — How It Works:** 3 steps numerados com cards
+  - **Seccao 5 — Social Proof:** Placeholder (pode ser omitido no lancamento)
+  - **Seccao 6 — Final CTA:** Banner full-width preto, texto branco, botao invertido
+  - **Seccao 7 — Footer:** Links de navegacao, contacto, social
+  - Styling Neo-Brutalism per [`DESIGN-GUIDELINES.md`](../design/DESIGN-GUIDELINES.md): borders 2px solid black, shadows `shadow-[4px_4px_0_#000]`, sem rounded corners, font Geist
+  - Responsivo: desktop (>=1024px), tablet (768-1023px), mobile (<768px)
+
+### 3. Layout
+
+- [ ] Actualizar `src/main/resources/templates/layout/main.html` se necessario para a landing page
+
+### 4. Formatar e Verificar
+
+- [ ] Formatar HTML com Prettier: `npx prettier --write "src/main/resources/**/*.{html,css,js,json}"`
+- [ ] Verificar performance: FCP < 1.5s, LCP < 2.5s, page weight < 500KB
+
+### Verificacao VS-01
+
+1. Abrir `http://localhost:8080/` → landing page visivel com 7 seccoes e styling Neo-Brutalism
+2. Responsivo em desktop, tablet, e mobile
+3. CTAs funcionais ("Get Started" → `/register`, "Learn More" → scroll)
+4. `./mvnw verify` → testes passam, formatting valido
+
+### Estrategia de Commits
+
+1. `feat: implement landing page with Neo-Brutalism design`
+
+---
+
+## VS-02: User Authentication (ID01-S1 + ID01-S2)
+
+**Branch:** `feature/vs02-user-authentication`
+
+Este slice absorve os items de shared infrastructure que sao pre-requisitos da autenticacao (Flyway V1, SecurityConfig, JpaAuditingConfig, UuidV7, UTC timezone).
 
 ### 1. Flyway Migration V1
 
@@ -51,8 +138,8 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
 
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/shared/config/SecurityConfig.java`
   - `@Configuration` + `@EnableWebSecurity`
-  - Para VS-00, permitir todos os requests (landing page publica): `authorizeHttpRequests(auth -> auth.anyRequest().permitAll())`
-  - Registar bean `BCryptPasswordEncoder` (ja preparado para VS-01)
+  - Inicialmente permitir todos os requests (landing page publica): `authorizeHttpRequests(auth -> auth.anyRequest().permitAll())`
+  - Registar bean `BCryptPasswordEncoder` (preparado para autenticacao)
   - CSRF activado (default do Spring Security)
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/shared/config/JpaAuditingConfig.java`
   - `@Configuration` + `@EnableJpaAuditing`
@@ -65,57 +152,9 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
 - [ ] Actualizar `src/main/java/dev/ivoencarnacao/jobtracker/Application.java`
   - Adicionar `TimeZone.setDefault(TimeZone.getTimeZone("UTC"))` antes de `SpringApplication.run()`
   - Garante que JVM opera sempre em UTC para consistencia com `TIMESTAMPTZ`
-- [ ] Remover `spring.security.user.name/password=admin` em `application-local.properties` (sera substituido pelo `JpaUserDetailsService` em VS-01)
+- [ ] Remover `spring.security.user.name/password=admin` em `application-local.properties` (substituido pelo `JpaUserDetailsService`)
 
-### 3. Landing Page
-
-- [ ] Criar controller `src/main/java/dev/ivoencarnacao/jobtracker/shared/config/WebConfig.java` (ou `HomeController`)
-  - `GET /` → renderiza `index.html` (landing page)
-- [ ] Redesenhar `src/main/resources/templates/index.html` segundo a `LANDING-PAGE-SPEC.md`:
-  - Decorar com `layout/main`
-  - **Seccao 1 — Hero:** Headline (problema), subheadline (solucao), CTA primario ("Get Started" → `/register`), CTA secundario ("Learn More" → scroll), visual/mockup
-  - **Seccao 2 — Problem Statement:** 3 pain points em cards Neo-Brutalism (grid 3 colunas desktop, 1 coluna mobile)
-  - **Seccao 3 — Features:** 4 features em rows alternadas imagem-texto
-  - **Seccao 4 — How It Works:** 3 steps numerados com cards
-  - **Seccao 5 — Social Proof:** Placeholder (pode ser omitido no lancamento)
-  - **Seccao 6 — Final CTA:** Banner full-width preto, texto branco, botao invertido
-  - **Seccao 7 — Footer:** Links de navegacao, contacto, social
-  - Styling Neo-Brutalism: borders 2px solid black, shadows `shadow-[4px_4px_0_#000]`, sem rounded corners, font Geist
-  - Responsivo: desktop (>=1024px), tablet (768-1023px), mobile (<768px)
-- [ ] Formatar HTML com Prettier: `npx prettier --write "src/main/resources/**/*.{html,css,js,json}"`
-
-### 4. CI/CD Pipeline (GitHub Actions)
-
-- [ ] Criar `.github/workflows/ci.yml`:
-  - Trigger: push para `main` e `develop`, pull requests para `main`
-  - Job `build`:
-    - Setup Java 21 (Temurin)
-    - Cache Maven dependencies
-    - `./mvnw verify` (compila, formata, testa com Testcontainers, JaCoCo coverage)
-  - Job `docker-build` (apos build):
-    - Build da imagem Docker para validar o Dockerfile
-  - Nao inclui deploy automatico nesta fase (deploy manual ou pipeline separada)
-- [ ] Verificar que o CI passa localmente com `./mvnw verify`
-- [ ] Verificar que o Dockerfile builda com sucesso: `docker build -t jobtracker .`
-
-### 5. Deploy Staging + Production
-
-- [ ] Definir estrategia de deploy (a clarificar com o utilizador — pode ser Docker Compose num VPS, Railway, Fly.io, etc.)
-- [ ] Garantir que `application.properties` (perfil default/production) tem configuracao adequada para datasource via environment variables
-- [ ] Testar deploy com `docker compose up` localmente
-
-### 6. Verificacao VS-00
-
-- [ ] Landing page acessivel em `http://localhost:8080/`
-- [ ] CI green (todos os testes passam, JaCoCo >= 70%, formatting valido)
-- [ ] Docker build funcional
-- [ ] Flyway migration V1 executa sem erros
-
----
-
-## VS-01: User Authentication (ID01-S1 + ID01-S2)
-
-### 7. Flyway Migration V2 — Tabela Users
+### 3. Flyway Migration V2 — Tabela Users
 
 - [ ] Criar `src/main/resources/db/migration/V2__create_users_table.sql`:
   ```sql
@@ -132,7 +171,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
   ```
 - [ ] Verificar migration com `./mvnw spring-boot:run -Dspring-boot.run.profiles=local`
 
-### 8. Domain Layer — User Aggregate
+### 4. Domain Layer — User Aggregate
 
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/identity/domain/User.java`:
   - Aggregate root — classe Java pura, zero dependencias de frameworks
@@ -152,7 +191,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
   - Interface no domain layer, sem imports de frameworks
   - Metodos: `User save(User user)`, `Optional<User> findByEmail(String email)`, `boolean existsByEmail(String email)`
 
-### 9. Application Layer — RegisterUserUseCase
+### 5. Application Layer — RegisterUserUseCase
 
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/identity/application/dto/RegisterUserInput.java`:
   - Record com campos: `email`, `password` (texto plano), `displayName`
@@ -172,7 +211,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
     5. Retornar `RegisterUserOutput`
   - **Sem domain events** (P1 — deferido)
 
-### 10. Infrastructure Layer — JPA + MapStruct
+### 6. Infrastructure Layer — JPA + MapStruct
 
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/identity/infrastructure/persistence/JpaUserEntity.java`:
   - `@Entity` + `@Table(name = "users", schema = "core")`
@@ -197,7 +236,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
   - Delega para `SpringDataUserRepository` + `UserMapper`
   - Metodos: `save()` → mapper para entity, save via Spring Data, mapper de volta para domain; `findByEmail()`, `existsByEmail()`
 
-### 11. Infrastructure Layer — Spring Security Integration
+### 7. Infrastructure Layer — Spring Security Integration
 
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/identity/infrastructure/security/JpaUserDetailsService.java`:
   - `@Service`
@@ -207,7 +246,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
     1. `userRepository.findByEmail(email)` → se nao encontrado, lancar `UsernameNotFoundException`
     2. Construir e retornar `org.springframework.security.core.userdetails.User` com email, passwordHash, e authorities (pode ser `ROLE_USER` por defeito)
 
-### 12. Application Layer — AuthenticatedUser
+### 8. Application Layer — AuthenticatedUser
 
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/identity/application/AuthenticatedUser.java`:
   - `@Component`
@@ -221,7 +260,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
   - Campo adicional: `userId` (UUID)
   - Usado pelo `JpaUserDetailsService` para incluir o UUID no principal
 
-### 13. Actualizar SecurityConfig para VS-01
+### 9. Actualizar SecurityConfig para Autenticacao
 
 - [ ] Actualizar `src/main/java/dev/ivoencarnacao/jobtracker/shared/config/SecurityConfig.java`:
   - Injetar `JpaUserDetailsService` como `UserDetailsService`
@@ -236,7 +275,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
   - Todas as restantes rotas requerem autenticacao
   - Manter `BCryptPasswordEncoder` bean
 
-### 14. Web Layer — Controllers
+### 10. Web Layer — Controllers
 
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/identity/web/RegistrationController.java`:
   - `GET /register`:
@@ -256,17 +295,17 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
     - O Spring Security trata do `POST /login` automaticamente
 
 - [ ] Criar controller ou rota para `/dashboard`:
-  - `GET /dashboard` → renderizar `dashboard/index.html` (stub placeholder para VS-01)
+  - `GET /dashboard` → renderizar `dashboard/index.html` (stub placeholder para VS-02)
   - Pode ser um `DashboardController` simples no pacote `dashboard/web/` ou no `shared/config/WebConfig`
 
-### 15. Exception Handling
+### 11. Exception Handling
 
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/identity/application/EmailAlreadyExistsException.java`:
   - `RuntimeException` com mensagem descritiva
 
-- [ ] Considerar se e necessario um `@ControllerAdvice` global ou se o tratamento de erros no `RegistrationController` e suficiente para VS-01
+- [ ] Considerar se e necessario um `@ControllerAdvice` global ou se o tratamento de erros no `RegistrationController` e suficiente para VS-02
 
-### 16. Templates Thymeleaf
+### 12. Templates Thymeleaf
 
 - [ ] Criar `src/main/resources/templates/identity/register.html`:
   - Decorar com `layout/main` via layout dialect
@@ -299,7 +338,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
 
 - [ ] Formatar todos os templates com Prettier
 
-### 17. Testes Unitarios
+### 13. Testes Unitarios
 
 - [ ] Criar `src/test/java/dev/ivoencarnacao/jobtracker/identity/domain/UserTests.java`:
   - Testar factory method `User.create()`:
@@ -322,7 +361,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
     - `existsByEmail` retorna true → lanca `EmailAlreadyExistsException`
     - `save` nunca e chamado
 
-### 18. Testes de Integracao
+### 14. Testes de Integracao
 
 - [ ] Criar `src/test/java/dev/ivoencarnacao/jobtracker/identity/web/RegistrationControllerIT.java`:
   - `@SpringBootTest` + `@AutoConfigureMockMvc`
@@ -355,7 +394,7 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
   - `GET /` (landing page) sem autenticacao → 200 (publica)
   - `GET /register` sem autenticacao → 200 (publica)
 
-### 19. Formatar e Validar
+### 15. Formatar e Validar
 
 - [ ] Formatar Java: `./mvnw spring-javaformat:apply`
 - [ ] Formatar templates: `npx prettier --write "src/main/resources/**/*.{html,css,js,json}"`
@@ -366,36 +405,47 @@ O codebase actual e um scaffold vazio: apenas `Application.java`, templates plac
 
 ## Estrategia de Commits (Conventional Commits)
 
+### VS-01 (Landing Page)
+
+1. `feat: implement landing page with Neo-Brutalism design`
+
+### VS-02 (User Authentication)
+
 Ordem sugerida, um commit por concern:
 
 1. `feat(shared): add Flyway V1 migration for core schema`
 2. `feat(shared): add SecurityConfig, JpaAuditingConfig, and UuidV7 utility`
 3. `feat(shared): force JVM timezone to UTC in Application entry point`
-4. `feat: implement landing page with Neo-Brutalism design`
-5. `ci: add GitHub Actions CI workflow`
-6. `feat(identity): add Flyway V2 migration for users table`
-7. `feat(identity): implement User aggregate root with UUID v7 factory method`
-8. `feat(identity): add RegisterUserUseCase with BCrypt hashing`
-9. `feat(identity): add JPA infrastructure (entity, repository, mapper)`
-10. `feat(identity): add JpaUserDetailsService and AppUserDetails`
-11. `feat(identity): add AuthenticatedUser cross-context identity helper`
-12. `feat(identity): configure Spring Security with form login and registration`
-13. `feat(identity): add registration and login controllers`
-14. `feat(identity): add register, login, and dashboard templates`
-15. `test(identity): add unit tests for User aggregate and RegisterUserUseCase`
-16. `test(identity): add integration tests for registration and login flows`
+4. `feat(identity): add Flyway V2 migration for users table`
+5. `feat(identity): implement User aggregate root with UUID v7 factory method`
+6. `feat(identity): add RegisterUserUseCase with BCrypt hashing`
+7. `feat(identity): add JPA infrastructure (entity, repository, mapper)`
+8. `feat(identity): add JpaUserDetailsService and AppUserDetails`
+9. `feat(identity): add AuthenticatedUser cross-context identity helper`
+10. `feat(identity): configure Spring Security with form login and registration`
+11. `feat(identity): add registration and login controllers`
+12. `feat(identity): add register, login, and dashboard templates`
+13. `test(identity): add unit tests for User aggregate and RegisterUserUseCase`
+14. `test(identity): add integration tests for registration and login flows`
 
 ---
 
 ## Verificacao End-to-End
 
-### VS-00
-1. `./mvnw spring-boot:run -Dspring-boot.run.profiles=local` → app inicia sem erros
-2. Abrir `http://localhost:8080/` → landing page visivel com styling Neo-Brutalism
-3. `./mvnw verify` → CI green, testes passam, JaCoCo >= 70%
-4. `docker build -t jobtracker .` → imagem Docker builda com sucesso
+### VS-00 ✓
+1. ~~`./mvnw spring-boot:run -Dspring-boot.run.profiles=local` → app inicia sem erros~~ ✓
+2. ~~`./mvnw verify` → CI green, testes passam, JaCoCo >= 70%~~ ✓
+3. ~~`docker build -t jobtracker .` → imagem Docker builda com sucesso~~ ✓
+4. ~~CI pipeline green no GitHub Actions~~ ✓
+5. ~~Render deploy funcional~~ ✓
 
 ### VS-01
+1. Abrir `http://localhost:8080/` → landing page visivel com 7 seccoes e styling Neo-Brutalism
+2. Responsivo em desktop, tablet, e mobile
+3. CTAs funcionais ("Get Started" → `/register`, "Learn More" → scroll)
+4. `./mvnw verify` → testes passam, formatting valido
+
+### VS-02
 1. Abrir `http://localhost:8080/register` → formulario de registo
 2. Preencher e submeter com dados validos → redirect para `/login?registered` com mensagem de sucesso
 3. Login com credenciais registadas → redirect para `/dashboard`
@@ -410,14 +460,16 @@ Ordem sugerida, um commit por concern:
 
 ## Ficheiros a Criar/Modificar
 
-### Novos (VS-00)
+### Novos (VS-01)
+- `src/main/java/.../shared/config/WebConfig.java` (ou `HomeController`)
+
+### Novos (VS-02 — Shared Infrastructure)
 - `src/main/resources/db/migration/V1__create_schema.sql`
 - `src/main/java/.../shared/config/SecurityConfig.java`
 - `src/main/java/.../shared/config/JpaAuditingConfig.java`
 - `src/main/java/.../shared/domain/UuidV7.java`
-- `.github/workflows/ci.yml`
 
-### Novos (VS-01)
+### Novos (VS-02 — Identity)
 - `src/main/resources/db/migration/V2__create_users_table.sql`
 - `src/main/java/.../identity/domain/User.java`
 - `src/main/java/.../identity/domain/UserRepository.java`
@@ -442,25 +494,29 @@ Ordem sugerida, um commit por concern:
 - `src/test/java/.../identity/web/RegistrationControllerIT.java`
 - `src/test/java/.../identity/web/LoginControllerIT.java`
 
-### Modificados
-- `src/main/java/.../Application.java` (adicionar `TimeZone.setDefault(UTC)`)
+### Modificados (VS-01)
 - `src/main/resources/templates/index.html` (landing page redesign)
+- `src/main/resources/templates/layout/main.html` (se necessario para landing page)
+
+### Modificados (VS-02)
+- `src/main/java/.../Application.java` (adicionar `TimeZone.setDefault(UTC)`)
 - `src/main/resources/templates/layout/main.html` (adicionar navegacao condicional)
-- `src/main/java/.../shared/config/SecurityConfig.java` (actualizado de VS-00 para VS-01)
+- `src/main/java/.../shared/config/SecurityConfig.java` (actualizado para form login)
 - `src/main/resources/application-local.properties` (remover spring.security.user default)
 
 ---
 
 ## Notas e Decisoes
 
-- **Sem domain events em VS-01** — `UserRegistered` e P1 (deferido para VS-09/VS-10)
+- **Sem domain events em VS-02** — `UserRegistered` e P1 (deferido para VS-10/VS-11)
 - **UUID v7 (RFC 9562)** gerado na application layer via `UuidV7.randomUUID()` — sequencial, index-friendly, sem dependencias externas
 - **`Persistable<UUID>`** — deferido para FUTURE.md como sugestao de melhoria de performance (evita `SELECT` antes de `INSERT` quando ID e pre-atribuido)
 - **Timestamps como `Instant`** no Java, mapeados para `TIMESTAMPTZ` no PostgreSQL. JVM em UTC.
 - **Spring Data JPA Auditing** (`@CreatedDate`, `@LastModifiedDate`) para audit timestamps automaticos
 - **`@EnableJpaAuditing`** numa `@Configuration` separada para compatibilidade com `@WebMvcTest`
 - **`usernameParameter("email")`** no Spring Security para o campo de login ser email
-- **Enums:** A tabela `users` nao tem enums. Discrepancia encontrada entre `DATA-SCHEMA-DETAIL.md` (VARCHAR) e `CLAUDE.md`/`MIGRATIONS.md` (PostgreSQL native enum types) — nao afecta VS-01 mas deve ser resolvida antes de VS-02
-- **Deploy:** Estrategia de deploy para staging/production ainda nao definida — sera abordada no contexto de VS-00
+- **Enums:** A tabela `users` nao tem enums. Discrepancia encontrada entre `DATA-SCHEMA-DETAIL.md` (VARCHAR) e `CLAUDE.md`/`MIGRATIONS.md` (PostgreSQL native enum types) — nao afecta VS-02 mas deve ser resolvida antes de VS-03
+- **Deploy:** Render configurado com PostgreSQL + web service. `autoDeploy: false`, deploy via webhook no CD pipeline.
 - **Regra CLAUDE.md:** Apos aprovacao, adicionar regra sobre seguir best practices Spring Boot 3.x / Hibernate 6
 - **FUTURE.md:** Adicionar `Persistable<UUID>` como sugestao de melhoria de performance na seccao Infrastructure
+- **Health check pos-deploy:** Requer `spring-boot-starter-actuator` (mencionado no SPRINTS.md mas nao no `pom.xml`). Melhoria futura.

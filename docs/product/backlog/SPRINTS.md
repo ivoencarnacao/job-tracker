@@ -2,48 +2,60 @@
 
 Continuous flow — one vertical slice per week, deployed to staging and production.
 
-| VS | Name | Backlog Slices | Week | Priority |
-| --- | --- | --- | --- | --- |
-| VS-00 | Infrastructure & CI/CD | — | W1 | P0 |
-| VS-01 | User Authentication | ID01-S1, ID01-S2 | W2 | P0 |
-| VS-02 | Application CRUD | TR01-S1, TR01-S2 | W3 | P0 |
-| VS-03 | Pipeline + Delete | TR02-S1, TR01-S3 | W4 | P0 |
-| VS-04 | Follow-up Reminders | TR03-S1, TR03-S2 | W5 | P0 |
-| VS-05 | Interviews + Offers | TR04-S1, TR05-S1 | W6 | P0 |
-| VS-06 | Search & Filter | TR06-S1, TR06-S2 | W7 | P0 |
-| VS-07 | Dashboard | DA01-S1, DA01-S2, DA01-S3 | W8 | P0 |
-| — | Beta Launch + Stabilization | — | W9 | — |
-| VS-08 | Ghosting Detection | TR07-S1, TR07-S2 | W10 | P1 |
-| VS-09 | Skill Catalog + Tagging | SK01-S1, SK01-S2 | W11 | P1 |
-| VS-10 | Skill Extraction | SK02-S1, SK02-S2 | W12 | P1 |
-| VS-11 | Insights + Advanced Filters | SK03-S1, DA02-S1, TR06-S3 | W13 | P1 |
+| VS    | Name                         | Backlog Slices              | Week | Priority |
+| ----- | ---------------------------- | --------------------------- | ---- | -------- |
+| VS-00 | Infrastructure & CI/CD       | —                           | W1   | P0       |
+| VS-01 | Landing Page                 | —                           | W1   | P0       |
+| VS-02 | User Authentication          | ID01-S1, ID01-S2            | W2   | P0       |
+| VS-03 | Application CRUD             | TR01-S1, TR01-S2            | W3   | P0       |
+| VS-04 | Pipeline + Delete            | TR02-S1, TR01-S3            | W4   | P0       |
+| VS-05 | Follow-up Reminders          | TR03-S1, TR03-S2            | W5   | P0       |
+| VS-06 | Interviews + Offers          | TR04-S1, TR05-S1            | W6   | P0       |
+| VS-07 | Search & Filter              | TR06-S1, TR06-S2            | W7   | P0       |
+| VS-08 | Dashboard                    | DA01-S1, DA01-S2, DA01-S3   | W8   | P0       |
+| —     | Beta Launch + Stabilization  | —                           | W9   | —        |
+| VS-09 | Ghosting Detection           | TR07-S1, TR07-S2            | W10  | P1       |
+| VS-10 | Skill Catalog + Tagging      | SK01-S1, SK01-S2            | W11  | P1       |
+| VS-11 | Skill Extraction             | SK02-S1, SK02-S2            | W12  | P1       |
+| VS-12 | Insights + Advanced Filters  | SK03-S1, DA02-S1, TR06-S3   | W13  | P1       |
 
 ---
 
-## VS-00 — Infrastructure & CI/CD (Week 1)
+## VS-00 — Infrastructure & CI/CD (Week 1) ✓ DONE
 
-- GitHub Actions CI pipeline (build, test, format-check on push/PR)
-- Staging deployment (Docker-based)
-- Production deployment with environment config
-- Flyway baseline: `V1__create_schema.sql` (CREATE SCHEMA core)
-- Testcontainers setup with abstract IT base class
-- Landing page at `/` with value proposition and CTA
-- Spring Actuator health check endpoint
+- [x] GitHub Actions CI pipeline (`build.yml` — build, test, format-check on push/PR)
+- [x] GitHub Actions CD pipeline (`deploy.yml` — Render deploy hook on main)
+- [x] Render deployment (`render.yaml` with PostgreSQL + web service)
+- [x] Docker multi-stage build (`Dockerfile`)
+- [x] Docker Compose (PostgreSQL 17 + pgAdmin 4)
+- [x] Testcontainers setup (`@ServiceConnection` pattern)
+- [x] Frontend tooling (Vite + Tailwind CSS 4 + frontend-maven-plugin)
+- [x] Code quality enforcement (JaCoCo 70%, Spring Java Format, Prettier, EditorConfig)
 
-**Deploy:** Landing page live on staging + production. CI pipeline green.
+**Deploy:** CI pipeline green. Staging + production deploy working on Render.
 
-## VS-01 — User Authentication (Week 2)
+## VS-01 — Landing Page (Week 1)
 
+- **Web:** Landing page at `/` with value proposition and CTA per [`LANDING-PAGE-SPEC.md`](../../design/LANDING-PAGE-SPEC.md)
+- **Design:** Neo-Brutalism styling per [`DESIGN-GUIDELINES.md`](../../design/DESIGN-GUIDELINES.md)
+- **Sections:** Hero, Problem Statement, Features, How It Works, Social Proof (placeholder), Final CTA, Footer
+- **Responsive:** Desktop (>=1024px), tablet (768-1023px), mobile (<768px)
+
+**Deploy:** Landing page live on staging + production.
+
+## VS-02 — User Authentication (Week 2)
+
+- **Shared Infrastructure:** Flyway V1 (core schema), SecurityConfig, JpaAuditingConfig, UuidV7 utility, UTC timezone
 - **Domain:** User aggregate, repository interface
 - **Application:** RegisterUserUseCase, DTOs
-- **Infrastructure:** JPA UserEntity, MapStruct mapper, SecurityConfig, BCrypt
+- **Infrastructure:** JPA UserEntity, MapStruct mapper, BCrypt
 - **Web:** Registration form (`/register`), login form (`/login`), controllers
 - **Migration:** `V2__create_users_table.sql`
 - **Tests:** Unit tests for domain, integration tests for registration + login flow
 
 **Deploy:** Users can register and log in. First functional production deploy.
 
-## VS-02 — Application CRUD (Week 3)
+## VS-03 — Application CRUD (Week 3)
 
 - **Domain:** JobApplication aggregate, value objects (ApplicationStatus enum type), repository interface
 - **Application:** CreateApplicationUseCase, UpdateApplicationUseCase, ListApplicationsUseCase, DTOs
@@ -54,7 +66,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 
 **Deploy:** Authenticated users can create, list, view, and edit job applications.
 
-## VS-03 — Pipeline + Delete (Week 4)
+## VS-04 — Pipeline + Delete (Week 4)
 
 - **Domain:** PipelineService domain service (11 states, transition validation), ApplicationStatusChanged event
 - **Application:** UpdateStatusUseCase with validation rules
@@ -64,7 +76,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 
 **Deploy:** Users can advance applications through pipeline states and delete applications.
 
-## VS-04 — Follow-up Reminders (Week 5)
+## VS-05 — Follow-up Reminders (Week 5)
 
 - **Domain:** FollowUp entity (child of JobApplication aggregate), FollowUpOutcome, FollowUpScheduled/FollowUpCompleted events
 - **Application:** CreateFollowUpUseCase, CompleteFollowUpUseCase, DTOs
@@ -75,7 +87,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 
 **Deploy:** Users can set follow-up reminders and mark them complete with outcome.
 
-## VS-05 — Interviews + Offers (Week 6)
+## VS-06 — Interviews + Offers (Week 6)
 
 - **Domain:** Interview entity (child of JobApplication), InterviewType, InterviewOutcome; Offer entity (1-to-1 with application), OfferStatus; InterviewScheduled and OfferReceived events
 - **Application:** Use cases for both entities, DTOs
@@ -86,7 +98,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 
 **Deploy:** Users can record interviews (type, date, outcome) and offers (salary, status) on applications.
 
-## VS-06 — Search & Filter (Week 7)
+## VS-07 — Search & Filter (Week 7)
 
 - **Application:** SearchApplicationsUseCase with combined criteria
 - **Infrastructure:** ILIKE query on company/title, Specification pattern for status multi-select filter, pagination
@@ -95,7 +107,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 
 **Deploy:** Users can search applications by text and filter by status.
 
-## VS-07 — Dashboard (Week 8)
+## VS-08 — Dashboard (Week 8)
 
 - **Domain:** Query service interfaces (read-only, cross-aggregate)
 - **Application:** DashboardQueryUseCase, metric DTOs
@@ -113,7 +125,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 - Bug fixes from self-testing
 - Error logging and basic monitoring
 
-## VS-08 — Ghosting Detection (Week 10)
+## VS-09 — Ghosting Detection (Week 10)
 
 - **Domain:** GhostingPolicy domain service (21-day rule on APPLIED/UNDER_REVIEW), isGhostingCandidate()
 - **Application:** DetectGhostingCandidatesUseCase, suggestion DTOs
@@ -123,7 +135,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 
 **Deploy:** Users see ghosting suggestions for stale applications.
 
-## VS-09 — Skill Catalog + Tagging (Week 11)
+## VS-10 — Skill Catalog + Tagging (Week 11)
 
 - **Domain:** Skill aggregate, SkillCategory enum, SkillAlias value objects
 - **Infrastructure:** Flyway seed migration with ~100 skills and aliases
@@ -134,7 +146,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 
 **Deploy:** Users can manually tag skills on applications from a curated catalog.
 
-## VS-10 — Skill Extraction (Week 12)
+## VS-11 — Skill Extraction (Week 12)
 
 - **Domain:** SkillExtractor domain service (case-insensitive keyword matching, word-boundary aware), SkillNormalizer (alias → canonical Skill resolution)
 - **Application:** ExtractSkillsUseCase triggered by JobDescriptionUpdated event
@@ -143,7 +155,7 @@ Continuous flow — one vertical slice per week, deployed to staging and product
 
 **Deploy:** System auto-extracts skills from job descriptions; users can accept or reject.
 
-## VS-11 — Insights + Advanced Filters (Week 13)
+## VS-12 — Insights + Advanced Filters (Week 13)
 
 - **Domain:** TrendAnalyzer (frequency computation, top-N, category breakdown)
 - **Application:** SkillInsightsQueryUseCase, DTOs

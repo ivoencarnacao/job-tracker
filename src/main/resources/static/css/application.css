@@ -6,4 +6,12 @@
 
 @theme {
   --font-geist: "Geist", "Geist Fallback", sans-serif;
+  --font-geist-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+  --shadow-brutal-sm: 2px 2px 0 #000;
+  --shadow-brutal-md: 4px 4px 0 #000;
+  --shadow-brutal-lg: 6px 6px 0 #000;
+}
+
+@utility border-3 {
+  border-width: 3px;
 }

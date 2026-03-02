@@ -111,4 +111,6 @@ Subject line only — **no body or footer**. Keep it concise and self-explanator
 
 **Commit by context:** Split commits by bounded context or concern. One commit per logical change — do not bundle unrelated changes together.
 
+**DDD language in commits:** Always use DDD/domain terminology in commit scopes and descriptions. Use bounded context names (`identity`, `tracking`, `skills`, `dashboard`) and domain concepts (e.g., "user aggregate", "registration", "pipeline") — never use internal identifiers like slice codes (VS-00, ID01-S1) or technical shorthand that lacks domain meaning.
+
 **No Co-Authored-By:** Never add `Co-Authored-By` trailers to commit messages.

@@ -9,11 +9,11 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
 
-    @Bean
-    @ServiceConnection
-    @SuppressWarnings("resource")
-    PostgreSQLContainer<?> postgresContainer() {
-        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:17"))
-                .withInitScript("init-schemas.sql");
-    }
+	@Bean
+	@ServiceConnection
+	@SuppressWarnings("resource")
+	PostgreSQLContainer<?> postgresContainer() {
+		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:17")).withInitScript("init-schemas.sql");
+	}
+
 }

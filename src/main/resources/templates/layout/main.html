@@ -23,8 +23,19 @@
       <vite:entry value="/css/application.css"></vite:entry>
     </vite:vite>
   </head>
-  <body>
-    <main layout:fragment="content"></main>
+  <body class="bg-white font-geist text-black">
+    <a
+      href="#main-content"
+      class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:border-2 focus-visible:border-black focus-visible:bg-white focus-visible:px-4 focus-visible:py-2 focus-visible:font-bold focus-visible:text-black focus-visible:shadow-brutal-sm"
+    >
+      Skip to main content
+    </a>
+
+    <header layout:fragment="page-header"></header>
+
+    <main id="main-content" layout:fragment="content"></main>
+
+    <footer layout:fragment="page-footer"></footer>
 
     <th:block layout:fragment="script-content"> </th:block>
   </body>

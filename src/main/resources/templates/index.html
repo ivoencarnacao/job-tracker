@@ -6,15 +6,583 @@
   layout:decorate="~{layout/main}"
 >
   <head>
-    <title>Dashboard</title>
+    <title>Job Tracker — Track Applications, Land Jobs</title>
+    <meta
+      name="description"
+      content="Track every job application, never miss a follow-up, and discover which skills the market wants. Free forever."
+    />
+    <meta
+      property="og:title"
+      content="Job Tracker — Track Applications, Land Jobs"
+    />
+    <meta
+      property="og:description"
+      content="Track every job application, never miss a follow-up, and discover which skills the market wants. Free forever."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
+    <!-- ============================================================
+         SECTION 0 — HEADER
+         ============================================================ -->
+    <header
+      layout:fragment="page-header"
+      class="sticky top-0 z-50 h-16 border-b-2 border-black bg-white"
+    >
+      <div
+        class="mx-auto flex h-full max-w-[1200px] items-center justify-between px-4 sm:px-6"
+      >
+        <a
+          href="/"
+          class="text-xl font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+          Job Tracker
+        </a>
+        <a
+          href="/register"
+          class="inline-block border-3 border-black bg-black px-4 py-2 text-sm font-bold text-white shadow-brutal-sm transition-all duration-150 ease-in-out hover:shadow-brutal-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-sm"
+        >
+          Get Started
+        </a>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         CONTENT — ALL PAGE SECTIONS
+         ============================================================ -->
     <div layout:fragment="content">
-      <!-- Add content here -->
+      <!-- ==========================================================
+           SECTION 1 — HERO
+           ========================================================== -->
+      <section id="hero" class="px-4 py-20 text-center sm:px-6 sm:py-28">
+        <div class="mx-auto max-w-[1200px]">
+          <h1
+            class="mb-6 text-4xl leading-tight font-bold tracking-tight sm:text-5xl"
+          >
+            Your Job Search Is Slipping Through the Cracks
+          </h1>
+          <p class="mx-auto mb-10 max-w-2xl text-lg text-gray-600 sm:text-xl">
+            Track every application, never miss a follow-up, and discover which
+            skills the market actually wants.
+          </p>
+          <div
+            class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <a
+              href="/register"
+              class="inline-block border-3 border-black bg-black px-8 py-4 text-base font-bold text-white shadow-brutal-lg transition-all duration-150 ease-in-out hover:-translate-y-0.5 hover:shadow-brutal-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-sm"
+            >
+              Get Started &mdash; It&rsquo;s Free
+            </a>
+            <button
+              id="learn-more-btn"
+              type="button"
+              class="text-base font-medium text-black underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Learn More
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================
+           SECTION 2 — PROBLEM STATEMENT
+           ========================================================== -->
+      <section id="problem" class="bg-gray-100 px-4 py-20 sm:px-6">
+        <div class="mx-auto max-w-[1200px]">
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Pain Point 1 — Lost Applications -->
+            <div class="border-2 border-black bg-white p-6 shadow-brutal-md">
+              <div class="mb-4 text-black" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+                  />
+                  <path d="m9.5 10.5 5 5" />
+                  <path d="m14.5 10.5-5 5" />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-lg font-semibold">
+                Where Did That Application Go?
+              </h3>
+              <p class="text-sm text-gray-600">
+                Spreadsheets fall apart after 20 rows. You forget which
+                companies you applied to, what stage you&rsquo;re at, and what
+                happened last.
+              </p>
+            </div>
+
+            <!-- Pain Point 2 — Missed Follow-ups -->
+            <div class="border-2 border-black bg-white p-6 shadow-brutal-md">
+              <div class="mb-4 text-black" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                  <path
+                    d="M17 17H4a1 1 0 0 1-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 0 1 .258-1.742"
+                  />
+                  <path d="m2 2 20 20" />
+                  <path
+                    d="M8.668 3.01A6 6 0 0 1 18 8c0 2.687.77 4.653 1.707 6.05"
+                  />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-lg font-semibold">
+                That Follow-up You Forgot to Send
+              </h3>
+              <p class="text-sm text-gray-600">
+                A week passes. Then two. The recruiter moved on and you never
+                heard back &mdash; because you didn&rsquo;t follow up in time.
+              </p>
+            </div>
+
+            <!-- Pain Point 3 — No Skill Visibility -->
+            <div class="border-2 border-black bg-white p-6 shadow-brutal-md">
+              <div class="mb-4 text-black" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"
+                  />
+                  <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                  <path
+                    d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"
+                  />
+                  <path d="m2 2 20 20" />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-lg font-semibold">
+                Which Skills Should You Actually Learn?
+              </h3>
+              <p class="text-sm text-gray-600">
+                You read dozens of job postings but can&rsquo;t see the
+                patterns. Which technologies keep showing up? Where should you
+                invest your time?
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================
+           SECTION 3 — FEATURES
+           ========================================================== -->
+      <section id="features" class="px-4 py-20 sm:px-6">
+        <div class="mx-auto max-w-[1200px]">
+          <h2 class="mb-12 text-center text-2xl font-bold sm:text-3xl">
+            Everything You Need to Run Your Job Search
+          </h2>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <!-- Feature 1 — Pipeline Tracking -->
+            <div class="border-2 border-black bg-white p-6 shadow-brutal-md">
+              <div class="mb-4 text-black" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M15 6a9 9 0 0 0-9 9V3" />
+                  <circle cx="18" cy="6" r="3" />
+                  <circle cx="6" cy="18" r="3" />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">
+                11-Stage Hiring Pipeline
+              </h3>
+              <p class="text-sm text-gray-600">
+                From saved to offer or rejected &mdash; track every application
+                through a hiring pipeline built for how recruitment actually
+                works. Not a generic kanban board.
+              </p>
+            </div>
+
+            <!-- Feature 2 — Follow-up Reminders -->
+            <div class="border-2 border-black bg-white p-6 shadow-brutal-md">
+              <div class="mb-4 text-black" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                  <path
+                    d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+                  />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">Never Miss a Follow-up</h3>
+              <p class="text-sm text-gray-600">
+                Set reminders for each application. Get prompted when it&rsquo;s
+                time to reach out. Mark the outcome and keep your pipeline
+                moving.
+              </p>
+            </div>
+
+            <!-- Feature 3 — Interview & Offer Management -->
+            <div class="border-2 border-black bg-white p-6 shadow-brutal-md">
+              <div class="mb-4 text-black" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                  <path d="M3 10h18" />
+                  <path d="m9 16 2 2 4-4" />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">
+                Interviews and Offers in One Place
+              </h3>
+              <p class="text-sm text-gray-600">
+                Log interview dates, types, and outcomes. Record salary offers
+                and compare across applications. Everything attached to the
+                application it belongs to.
+              </p>
+            </div>
+
+            <!-- Feature 4 — Skill Trend Insights -->
+            <div class="border-2 border-black bg-white p-6 shadow-brutal-md">
+              <div class="mb-4 text-black" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M16 7h6v6" />
+                  <path d="m22 7-8.5 8.5-5-5L2 17" />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold">
+                See What the Market Wants
+              </h3>
+              <p class="text-sm text-gray-600">
+                Job Tracker analyzes the skills mentioned across your saved
+                postings and shows you which technologies are in highest demand
+                &mdash; so you know where to focus.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================
+           SECTION 4 — HOW IT WORKS
+           ========================================================== -->
+      <section id="how-it-works" class="bg-gray-100 px-4 py-20 sm:px-6">
+        <div class="mx-auto max-w-[1200px]">
+          <h2 class="mb-12 text-center text-2xl font-bold sm:text-3xl">
+            Up and Running in Minutes
+          </h2>
+          <div class="relative grid grid-cols-1 gap-8 md:grid-cols-3">
+            <!-- Connecting line (desktop only) -->
+            <div
+              class="pointer-events-none absolute top-12 right-[calc(16.67%+2rem)] left-[calc(16.67%+2rem)] z-0 hidden h-0.5 bg-black md:block"
+              aria-hidden="true"
+            ></div>
+
+            <!-- Step 1 -->
+            <div
+              class="relative z-10 border-2 border-black bg-white p-6 text-center shadow-brutal-md"
+            >
+              <div
+                class="mx-auto mb-3 flex h-10 w-10 items-center justify-center border-2 border-black bg-black font-geist-mono text-lg font-bold text-white"
+              >
+                1
+              </div>
+              <div
+                class="mx-auto mb-4 flex justify-center text-black"
+                aria-hidden="true"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <line x1="19" x2="19" y1="8" y2="14" />
+                  <line x1="22" x2="16" y1="11" y2="11" />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-lg font-semibold">Create Your Account</h3>
+              <p class="text-sm text-gray-600">
+                Sign up in under a minute. No credit card, no setup &mdash; just
+                your email and you&rsquo;re in.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div
+              class="relative z-10 border-2 border-black bg-white p-6 text-center shadow-brutal-md"
+            >
+              <div
+                class="mx-auto mb-3 flex h-10 w-10 items-center justify-center border-2 border-black bg-black font-geist-mono text-lg font-bold text-white"
+              >
+                2
+              </div>
+              <div
+                class="mx-auto mb-4 flex justify-center text-black"
+                aria-hidden="true"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
+                  />
+                  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                  <path d="M9 15h6" />
+                  <path d="M12 18v-6" />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-lg font-semibold">
+                Add Your First Application
+              </h3>
+              <p class="text-sm text-gray-600">
+                Paste the job posting, fill in the basics, and let the pipeline
+                do the rest.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div
+              class="relative z-10 border-2 border-black bg-white p-6 text-center shadow-brutal-md"
+            >
+              <div
+                class="mx-auto mb-3 flex h-10 w-10 items-center justify-center border-2 border-black bg-black font-geist-mono text-lg font-bold text-white"
+              >
+                3
+              </div>
+              <div
+                class="mx-auto mb-4 flex justify-center text-black"
+                aria-hidden="true"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 21v-6" />
+                  <path d="M12 21V9" />
+                  <path d="M19 21V3" />
+                </svg>
+              </div>
+              <h3 class="mb-2 text-lg font-semibold">
+                Track, Follow Up, and Learn
+              </h3>
+              <p class="text-sm text-gray-600">
+                Move applications through stages, set reminders, and watch your
+                skill insights grow as you add more postings.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================
+           SECTION 5 — SOCIAL PROOF (PLACEHOLDER)
+           ========================================================== -->
+      <section id="social-proof" class="px-4 py-20 sm:px-6">
+        <div class="mx-auto max-w-[1200px] text-center">
+          <h2 class="mb-4 text-2xl font-bold sm:text-3xl">
+            Trusted by Job Seekers
+          </h2>
+          <p class="mx-auto max-w-xl text-base text-gray-600">
+            We&rsquo;re just getting started. Be among the first to try Job
+            Tracker and share your experience.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==========================================================
+           SECTION 6 — FINAL CTA
+           ========================================================== -->
+      <section id="cta" class="bg-black px-4 py-20 text-center sm:px-6">
+        <div class="mx-auto max-w-[1200px]">
+          <h2 class="mb-4 text-3xl font-bold text-white sm:text-4xl">
+            Stop Losing Track. Start Landing Jobs.
+          </h2>
+          <p class="mb-10 text-base text-gray-400">
+            Free forever for job seekers. No credit card required.
+          </p>
+          <a
+            href="/register"
+            class="inline-block border-3 border-white bg-white px-8 py-4 text-base font-bold text-black shadow-[6px_6px_0_#fff] transition-all duration-150 ease-in-out hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#fff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_#fff]"
+          >
+            Get Started &mdash; It&rsquo;s Free
+          </a>
+        </div>
+      </section>
     </div>
 
+    <!-- ============================================================
+         SECTION 7 — FOOTER
+         ============================================================ -->
+    <footer
+      layout:fragment="page-footer"
+      class="border-t-2 border-white bg-black px-4 py-8 text-white sm:px-6"
+    >
+      <div
+        class="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-6 sm:flex-row"
+      >
+        <p class="text-sm text-gray-400">
+          &copy; 2026 Job Tracker. All rights reserved.
+        </p>
+        <nav aria-label="Footer navigation">
+          <ul class="flex flex-wrap gap-4 text-sm">
+            <li>
+              <a
+                href="/about"
+                class="text-gray-400 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="/privacy"
+                class="text-gray-400 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a
+                href="/terms"
+                class="text-gray-400 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Terms of Service
+              </a>
+            </li>
+            <li>
+              <a
+                href="mailto:contact@jobtracker.dev"
+                class="text-gray-400 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="flex gap-3">
+          <a
+            href="https://github.com"
+            aria-label="Job Tracker on GitHub"
+            class="text-gray-400 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+              />
+              <path d="M9 18c-4.51 2-5-2-7-2" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================================================
+         SCRIPT — SMOOTH SCROLL
+         ============================================================ -->
     <th:block layout:fragment="script-content">
-      <!-- Add additional scripts that there are only needed for this page (Application wide scripts should be added in layout/main.html) -->
+      <script>
+        (function () {
+          var btn = document.getElementById("learn-more-btn");
+          if (!btn) return;
+          btn.addEventListener("click", function () {
+            var target = document.getElementById("features");
+            if (target)
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        })();
+      </script>
     </th:block>
   </body>
 </html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/main}"
+>
+  <head>
+    <title>Create Your Account</title>
+  </head>
+  <body>
+    <div layout:fragment="content" class="min-h-screen bg-gray-100">
+      <div class="mx-auto max-w-md px-4 pt-16 pb-20 sm:px-6">
+        <div class="border-2 border-black bg-white p-8 shadow-brutal-md">
+          <h1 class="mb-6 text-2xl font-bold">Create Your Account</h1>
+
+          <form action="/register" method="post" class="space-y-5">
+            <!-- Display Name -->
+            <div>
+              <label for="displayName" class="mb-1 block text-sm font-medium">
+                Display Name
+              </label>
+              <input
+                type="text"
+                id="displayName"
+                name="displayName"
+                required
+                placeholder="Your name"
+                class="w-full border-2 border-black p-3 transition-all duration-150 ease-in-out placeholder:text-gray-400 focus:shadow-brutal-sm focus:outline-none"
+              />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label for="email" class="mb-1 block text-sm font-medium">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="you@example.com"
+                class="w-full border-2 border-black p-3 transition-all duration-150 ease-in-out placeholder:text-gray-400 focus:shadow-brutal-sm focus:outline-none"
+              />
+            </div>
+
+            <!-- Password -->
+            <div>
+              <label for="password" class="mb-1 block text-sm font-medium">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                placeholder="Choose a password"
+                class="w-full border-2 border-black p-3 transition-all duration-150 ease-in-out placeholder:text-gray-400 focus:shadow-brutal-sm focus:outline-none"
+              />
+            </div>
+
+            <!-- Confirm Password -->
+            <div>
+              <label
+                for="confirmPassword"
+                class="mb-1 block text-sm font-medium"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                required
+                placeholder="Repeat your password"
+                class="w-full border-2 border-black p-3 transition-all duration-150 ease-in-out placeholder:text-gray-400 focus:shadow-brutal-sm focus:outline-none"
+              />
+            </div>
+
+            <!-- Submit -->
+            <button
+              type="submit"
+              class="w-full border-3 border-black bg-black px-6 py-3 text-base font-bold text-white shadow-brutal-md transition-all duration-150 ease-in-out hover:shadow-brutal-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-sm"
+            >
+              Create Account
+            </button>
+          </form>
+
+          <p class="mt-6 text-center text-sm text-gray-600">
+            Already have an account?
+            <a
+              href="/login"
+              class="font-medium text-black underline underline-offset-2 hover:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Log in
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

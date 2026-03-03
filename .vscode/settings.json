@@ -16,14 +16,17 @@
     "source.organizeImports": "explicit"
   },
 
-  // Formatter (Global)
+  // --- Formatter ---
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
-  // Formatter (Java, XML)
+  // ---Java ---
   "[java]": {
     "editor.defaultFormatter": "redhat.java",
+    "editor.insertSpaces": false,
     "editor.tabSize": 4
   },
+
+  // --- XML ---
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml",
     "editor.tabSize": 4

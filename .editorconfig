@@ -10,7 +10,7 @@ trim_trailing_whitespace = true
 
 # Java files
 [*.java]
-indent_style = space
+indent_style = tab
 indent_size = 4
 
 # SQL files (Flyway Scripts)

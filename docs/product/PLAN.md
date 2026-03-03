@@ -331,7 +331,16 @@ Este slice absorve os items de shared infrastructure que sao pre-requisitos da a
 - [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/identity/application/EmailAlreadyExistsException.java`:
   - `RuntimeException` com mensagem descritiva
 
-- [ ] Considerar se e necessario um `@ControllerAdvice` global ou se o tratamento de erros no `RegistrationController` e suficiente para VS-02
+- [ ] Criar `src/main/java/dev/ivoencarnacao/jobtracker/shared/web/GlobalExceptionHandler.java`:
+  - `@ControllerAdvice` global para tratamento centralizado de excepcoes
+  - Handler para `EmailAlreadyExistsException` (e futuras excepcoes de dominio como `NotFoundException`, `AccessDeniedException`)
+  - Handler generico para excepcoes inesperadas (500) com logging
+  - Redirecionar para custom error pages styled
+
+- [ ] Criar custom error pages styled com Neo-Brutalism:
+  - `src/main/resources/templates/error/404.html` — pagina "Not Found" com link para landing page
+  - `src/main/resources/templates/error/500.html` — pagina "Something went wrong" com link para landing page
+  - Spring Boot auto-resolve templates em `error/{status}.html` sem configuracao adicional
 
 ### 12. Templates Thymeleaf
 

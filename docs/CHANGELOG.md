@@ -4,6 +4,27 @@ All notable changes to project documentation are documented in this file.
 
 ---
 
+## 2026-03-03 — Infrastructure ADRs
+
+Added four architecture decision records covering infrastructure and tooling choices:
+
+- **ADR-0008: Render as Deployment Platform** — documents the choice of Render with Blueprint (`render.yaml`) for infrastructure-as-code, free-tier Docker-based deploys, and managed PostgreSQL
+- **ADR-0009: GitHub Actions for CI/CD** — documents the two-workflow strategy: CI (`build.yml` with `./mvnw verify`) and CD (`deploy.yml` with Render deploy hook)
+- **ADR-0010: Docker Compose for Local Development** — documents the three-service setup (PostgreSQL 17, pgAdmin 4, app) with Spring Boot Docker Compose support for auto-discovery
+- **ADR-0011: Spring Java Format for Code Style** — documents the choice of Spring Java Format with build-time validation and one-command auto-fix
+
+---
+
+## 2026-03-03 — Build and startup fixes
+
+Fixed three issues preventing `./mvnw verify` and `./mvnw spring-boot:run -Dspring-boot.run.profiles=local` from succeeding.
+
+- Fixed Java formatting violations in `SecurityConfig.java` and `TestcontainersConfiguration.java` via `spring-javaformat:apply`
+- Added `jacoco-maven-plugin` version (0.8.12) to `pom.xml` `<properties>`, eliminating the Maven warning about missing plugin version
+- Added default values to environment placeholders in `application.properties` (`${POSTGRES_HOST:localhost}`, `${POSTGRES_PORT:5432}`, `${POSTGRES_DB:jobtracker_db}`, `${SPRING_DATASOURCE_USERNAME:postgres}`, `${SPRING_DATASOURCE_PASSWORD:postgres}`) so the app starts locally without requiring environment variables
+
+---
+
 ## 2026-03-01 — Combined product and implementation roadmap
 
 Added `docs/product/ROADMAP.md` — a single document that synthesizes MVP-SCOPE, GTM-STRATEGY, EPIC-MAP, JOURNEY, and METRICS-PLAN into a unified view.

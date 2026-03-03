@@ -18,7 +18,6 @@
     ".gitattributes",
     ".gitignore",
     ".prettierrc",
-
     "compose.yaml",
     "Dockerfile",
     "package.json",
@@ -26,5 +25,9 @@
     "pom.xml",
     "vite.config.js"
   ],
-  "words": ["Thymeleaf"]
+  "words": [
+    "ivoencarnacao",
+    "jobtracker",
+    "Thymeleaf"
+  ]
 }

@@ -74,50 +74,78 @@ Este plano cobre as tres primeiras Vertical Slices do MVP:
 
 ## VS-01: Landing Page
 
-**Branch:** `feature/vs01-landing-page`
+**Branch:** `feature/landing-page`
 
-Scope: Redesign do `index.html` segundo a [`LANDING-PAGE-SPEC.md`](../design/LANDING-PAGE-SPEC.md). Trabalho puramente frontend/template — sem domain logic, migrations, ou seguranca. Copy EN hardcoded no template; [`LANDING-PAGE-COPY.md`](../design/LANDING-PAGE-COPY.md) como referencia (EN + PT-PT). Migracao para i18n (`MessageSource`) deferida para futuro.
+Scope: Redesign do `index.html` segundo a [`LANDING-PAGE-SPEC.md`](../design/LANDING-PAGE-SPEC.md) + templates styled para `/register` e `/login`. Trabalho puramente frontend/template — sem domain logic, migrations, ou seguranca (excepto `SecurityConfig` minimal com `permitAll`). Copy EN hardcoded no template; [`LANDING-PAGE-COPY.md`](../design/LANDING-PAGE-COPY.md) como referencia. Migracao para i18n (`MessageSource`) deferida para futuro.
 
 **Milestone dedicada:** Nao. A spec ja existe (`LANDING-PAGE-SPEC.md` + `DESIGN-GUIDELINES.md` + `LANDING-PAGE-COPY.md`), nao ha bounded context nem domain logic — a seccao neste plano com checklist e suficiente.
 
-### 1. Controller
+### Decisoes de Implementacao
 
-- [ ] Criar controller `GET /` — view controller em `shared/config/WebConfig.java` (ou `HomeController`)
-  - Renderiza `index.html` (landing page)
+- **SecurityConfig:** Minimal `permitAll` criado em VS-01 (antecipado de VS-02). Sem ele, Spring Security bloqueia `GET /` com redirect para login form auto-gerado.
+- **HomeController:** `@Controller` unico em `shared/web/` com `@GetMapping` para `/`, `/register`, `/login`. Substitui abordagem `WebConfig.addViewControllers`. Sera refactored em VS-02 quando `/register` e `/login` migrarem para `identity/web/`.
+- **Register/Login:** Templates styled em `identity/` — formularios visuais Neo-Brutalism, sem backend logic. Forms tem `action` e `method` mas POST nao e tratado (VS-02).
+- **Layout:** Fragment slots `page-header` e `page-footer` em `main.html`. Paginas que nao definem estes fragments renderizam slots vazios. Landing page override com header (sticky, logo + CTA) e footer (preto, nav + social).
+- **Icons:** Inline Lucide SVGs (sem CDN, sem npm package). Zero dependencias externas.
+- **Social Proof:** Incluido com placeholder text ("We're just getting started...").
+- **i18n:** EN hardcoded. Migracao para `MessageSource` deferida.
+- **CTA invertido:** Shadow `shadow-[6px_6px_0_#fff]` (valor arbitrario Tailwind) — shadow preto invisivel em `bg-black`.
+- **`PasswordEncoder` bean:** Declarado no `SecurityConfig` como forward-compatibility para VS-02.
 
-### 2. Landing Page
+### 1. Infraestrutura
 
-- [ ] Redesenhar `src/main/resources/templates/index.html` segundo a `LANDING-PAGE-SPEC.md`:
-  - Decorar com `layout/main`
-  - **Seccao 1 — Hero:** Headline (problema), subheadline (solucao), CTA primario ("Get Started" → `/register`), CTA secundario ("Learn More" → scroll), visual/mockup
-  - **Seccao 2 — Problem Statement:** 3 pain points em cards Neo-Brutalism (grid 3 colunas desktop, 1 coluna mobile)
-  - **Seccao 3 — Features:** 4 features em rows alternadas imagem-texto
-  - **Seccao 4 — How It Works:** 3 steps numerados com cards
-  - **Seccao 5 — Social Proof:** Placeholder (pode ser omitido no lancamento)
-  - **Seccao 6 — Final CTA:** Banner full-width preto, texto branco, botao invertido
-  - **Seccao 7 — Footer:** Links de navegacao, contacto, social
-  - Styling Neo-Brutalism per [`DESIGN-GUIDELINES.md`](../design/DESIGN-GUIDELINES.md): borders 2px solid black, shadows `shadow-[4px_4px_0_#000]`, sem rounded corners, font Geist
-  - Responsivo: desktop (>=1024px), tablet (768-1023px), mobile (<768px)
+- [x] Criar `src/main/java/.../shared/config/SecurityConfig.java` — `permitAll` + `BCryptPasswordEncoder`
+- [x] Criar `src/main/java/.../shared/web/HomeController.java` — `GET /`, `GET /register`, `GET /login`
 
-### 3. Layout
+### 2. Layout
 
-- [ ] Actualizar `src/main/resources/templates/layout/main.html` se necessario para a landing page
+- [x] Actualizar `src/main/resources/templates/layout/main.html`:
+  - Body classes: `font-geist bg-white text-black`
+  - Skip-to-content link (acessibilidade)
+  - Fragment slots: `page-header`, `content` (com `id="main-content"`), `page-footer`, `script-content`
 
-### 4. Formatar e Verificar
+### 3. Landing Page
 
+- [x] Redesenhar `src/main/resources/templates/index.html` segundo a `LANDING-PAGE-SPEC.md`:
+  - Decorar com `layout/main`, define 4 fragments: `page-header`, `content`, `page-footer`, `script-content`
+  - **Seccao 0 — Header:** Sticky top bar 64px, logo "Job Tracker", CTA "Get Started" → `/register`
+  - **Seccao 1 — Hero:** Headline, subheadline, CTA primario (shadow-brutal-lg), CTA secundario (ghost, smooth scroll)
+  - **Seccao 2 — Problem Statement:** 3 pain points em cards Neo-Brutalism (grid 1→2→3 colunas)
+  - **Seccao 3 — Features:** 4 features em grid 2x2 desktop, `id="features"` como scroll target
+  - **Seccao 4 — How It Works:** 3 steps numerados com connecting line horizontal (desktop)
+  - **Seccao 5 — Social Proof:** Placeholder com empty state text
+  - **Seccao 6 — Final CTA:** Banner full-width preto, texto branco, CTA invertido
+  - **Seccao 7 — Footer:** Links de navegacao, contacto, GitHub icon
+  - SEO meta tags: title, description, og:title, og:description, og:type, twitter:card
+  - Smooth scroll JS (IIFE vanilla) para "Learn More" → `#features`
+  - Responsivo: mobile (<768px), tablet (768-1023px), desktop (>=1024px)
+
+### 4. Register e Login
+
+- [x] Criar `src/main/resources/templates/identity/register.html` — formulario styled (display name, email, password, confirm password)
+- [x] Criar `src/main/resources/templates/identity/login.html` — formulario styled (email, password)
+
+### 5. Formatar e Verificar
+
+- [ ] Formatar Java: `./mvnw spring-javaformat:apply`
 - [ ] Formatar HTML com Prettier: `npx prettier --write "src/main/resources/**/*.{html,css,js,json}"`
-- [ ] Verificar performance: FCP < 1.5s, LCP < 2.5s, page weight < 500KB
+- [ ] Verificar build: `./mvnw verify`
 
 ### Verificacao VS-01
 
-1. Abrir `http://localhost:8080/` → landing page visivel com 7 seccoes e styling Neo-Brutalism
+1. Abrir `http://localhost:8080/` → landing page visivel com 8 seccoes e styling Neo-Brutalism
 2. Responsivo em desktop, tablet, e mobile
-3. CTAs funcionais ("Get Started" → `/register`, "Learn More" → scroll)
-4. `./mvnw verify` → testes passam, formatting valido
+3. CTAs funcionais ("Get Started" → `/register`, "Learn More" → scroll para Features)
+4. `/register` → pagina styled com formulario de registo
+5. `/login` → pagina styled com formulario de login
+6. Navegacao entre register ↔ login funcional
+7. `./mvnw verify` → testes passam, formatting valido
 
 ### Estrategia de Commits
 
-1. `feat: implement landing page with Neo-Brutalism design`
+1. `feat(shared): add SecurityConfig with permitAll and HomeController for page routes`
+2. `feat: implement landing page with Neo-Brutalism design`
+3. `feat(identity): add styled register and login page templates`
 
 ---
 

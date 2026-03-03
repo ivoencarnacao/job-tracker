@@ -37,7 +37,7 @@
         <!-- Maven plugins -->
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <io.spring.javaformat.version>0.0.47</io.spring.javaformat.version>
-        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <!-- Frontend -->
         <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
         <frontend-maven-plugin.nodeVersion>v24.13.1</frontend-maven-plugin.nodeVersion>
